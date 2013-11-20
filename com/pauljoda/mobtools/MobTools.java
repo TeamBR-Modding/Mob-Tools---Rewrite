@@ -2,7 +2,9 @@ package com.pauljoda.mobtools;
 
 import java.io.File;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
 
 import com.pauljoda.mobtools.common.CommonProxy;
@@ -21,6 +23,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
@@ -38,12 +42,19 @@ public class MobTools {
 	
 	
 	//Creeper
-	EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 1, 100, 100.0F, 1.0F, 0);
+	public static EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 2, 200, 100.0F, 10.0F, 0);
 	//Ender
-	
+	public static EnumToolMaterial ENDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("ENDER_TOOL_MATERIAL", 2, 1600, 8.0F, 5F, 4);
 	//Blaze
-	
+	public static EnumToolMaterial BLAZE_TOOL_MATERIAL = EnumHelper.addToolMaterial("BLAZE_TOOL_MATERIAL", 2, 400, 9.0F, 6F, 8);
 	//Spider
+	public static EnumToolMaterial SPIDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("SPIDER_TOOL_MATERIAL", 2, 400, 5.0F, 4F, 50);
+	
+	public static CreativeTabs tabMobTools = new CreativeTabs("tabMobTools") {
+		public ItemStack getIconItemStack() {
+			return new ItemStack(ToolManager.creeperSword.itemID, 1, 0);
+		}
+	};
 	
 	
 	
@@ -61,16 +72,28 @@ public class MobTools {
         
         // Initialize the Version Check Tick Handler (Client only)
         TickRegistry.registerTickHandler(new VersionTickHandler(), Side.CLIENT);
+        
+        // Add Creative Tab
+		LanguageRegistry.instance().addStringLocalization("itemGroup.tabMobTools", "en_US", "Mob Tools");
 		
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		
+		//Register Tools
 		ToolManager.registerTools();
+		ToolManager.registerCraftingRecipes();
+		
+		//RegisterTileEntity
+		proxy.registerTileEntities();
+		
+	    //Lets get Gui
+        NetworkRegistry.instance().registerGuiHandler(this, proxy);
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {}
 
 }
+
