@@ -30,8 +30,11 @@ public class GeneralSettings {
 	public static int spidiumSwordID;
 	public static int blaziumSwordID;
 	
-	
-	
+	//Pickaxes
+	public static int creeperPickID;
+	public static int endiumPickID;
+	public static int spidiumPickID;
+	public static int blaziumPickID;
 	
 	private static Configuration config;
 
@@ -57,11 +60,17 @@ public class GeneralSettings {
 			spidium = config.getItem("Spidium ID", 802).getInt();
 			blazium = config.getItem("Blazium ID", 803).getInt();
 			
-			//Creeper Tools
+			//Swords
 			creeperSwordID = config.getItem("Creeper Sword ID", 805).getInt();
 			endiumSwordID = config.getItem("Endium Sword ID", 806).getInt();
 			spidiumSwordID = config.getItem("Spidium Sword ID", 807).getInt();
 			blaziumSwordID = config.getItem("Blazium Sword ID", 808).getInt();
+			
+			//Picks
+			creeperPickID = config.getItem("Creeper PickAxe ID", 809).getInt();
+			endiumPickID = config.getItem("Endium PickAxe ID", 810).getInt();
+			spidiumPickID = config.getItem("Spidium PickAxe ID", 811).getInt();
+			blaziumPickID = config.getItem("Blazium PickAxe ID", 812).getInt();
 			
 		}
 		catch (Exception e) {

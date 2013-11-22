@@ -42,7 +42,7 @@ public class MobTools {
 	
 	
 	//Creeper
-	public static EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 2, 200, 100.0F, 10.0F, 0);
+	public static EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 2, 200, 15.0F, 10.0F, 0);
 	//Ender
 	public static EnumToolMaterial ENDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("ENDER_TOOL_MATERIAL", 2, 1600, 8.0F, 5F, 4);
 	//Blaze

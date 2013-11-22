@@ -1,5 +1,7 @@
 package com.pauljoda.mobtools.infusion;
 
+import com.pauljoda.mobtools.lib.Reference;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +9,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ContainerInfusingFurnace extends Container {
@@ -123,7 +124,7 @@ public class ContainerInfusingFurnace extends Container {
                              return null;
                          }
                      }
-                     else if (itemstack1 == new ItemStack(Item.ingotIron))
+                     else if (Reference.isValidFusee(itemstack1))
                      {
                          if (!this.mergeItemStack(itemstack1, 1, 2, false))
                          {

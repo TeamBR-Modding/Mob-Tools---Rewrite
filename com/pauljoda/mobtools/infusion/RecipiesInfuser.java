@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class RecipiesInfuser {
-	   private static final RecipiesInfuser smeltingBase = new RecipiesInfuser();
 
 	    /** The list of smelting results. */
 	   private Map<Integer, Float> experienceList = new HashMap<Integer, Float>();
@@ -59,6 +58,21 @@ public class RecipiesInfuser {
 	        	if(item.itemID == Item.blazeRod.itemID)
 	        		return new ItemStack(ToolManager.blaziumSword, 1);
 	        	
+	        }
+	        
+	        else if(item2.itemID == Item.pickaxeIron.itemID)
+	        {
+	        	if(item.itemID == Item.gunpowder.itemID)
+	        		return new ItemStack(ToolManager.creeperPick, 1);
+	        	
+	        	if(item.itemID == Item.enderPearl.itemID)
+	        		return new ItemStack(ToolManager.endiumPick, 1);
+	        	
+	        	if(item.itemID == Item.spiderEye.itemID)
+	        		return new ItemStack(ToolManager.spidiumPick, 1);
+	        	
+	        	if(item.itemID == Item.blazeRod.itemID)
+	        		return new ItemStack(ToolManager.blaziumPick, 1);
 	        }
 	        
 	        return null;

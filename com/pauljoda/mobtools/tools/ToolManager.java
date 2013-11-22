@@ -24,15 +24,21 @@ public class ToolManager {
 	public static Item spidium = null;
 	public static Item blazium = null;
 
-	//Creeper Tools
+	//Swords
 	public static Item creeperSword = null;
 	public static Item endiumSword = null;
 	public static Item spidiumSword = null;
 	public static Item blaziumSword = null;
+	
+	//PickAxe
+	public static Item creeperPick = null;
+	public static Item endiumPick = null;
+	public static Item spidiumPick = null;
+	public static Item blaziumPick = null;
 
 	public static void registerTools()
 	{
-		//Adding
+		//Adding----------------------------------------------------------------------------------------
 
 		//Infusing Furnace
 		infusingFurnace = new BlockInfusingFurnace(GeneralSettings.infusingFurnace, false).setUnlocalizedName("infusingFurnace").setCreativeTab(MobTools.tabMobTools);
@@ -49,8 +55,14 @@ public class ToolManager {
 		endiumSword = new MobToolsSword(GeneralSettings.endiumSwordID, MobTools.BLAZE_TOOL_MATERIAL, "enderSword", endium.itemID, 2);
 		spidiumSword = new MobToolsSword(GeneralSettings.spidiumSwordID, MobTools.SPIDER_TOOL_MATERIAL, "spiderSword", spidium.itemID, 3);
 		blaziumSword = new MobToolsSword(GeneralSettings.blaziumSwordID, MobTools.BLAZE_TOOL_MATERIAL, "blazeSword", blazium.itemID, 4);
+		
+		//Picks
+		creeperPick = new MobToolsPick(GeneralSettings.creeperPickID, MobTools.CREEPER_TOOL_MATERIAL, "creeperPick", creepium.itemID, 1);
+		endiumPick = new MobToolsPick(GeneralSettings.endiumPickID, MobTools.ENDER_TOOL_MATERIAL, "enderPick", endium.itemID, 2);
+		spidiumPick = new MobToolsPick(GeneralSettings.spidiumPickID, MobTools.SPIDER_TOOL_MATERIAL, "spiderPick", spidium.itemID, 3);
+		blaziumPick = new MobToolsPick(GeneralSettings.blaziumPickID, MobTools.BLAZE_TOOL_MATERIAL, "blazePick", blazium.itemID, 4);
 
-		//Registering
+		//Registering---------------------------------------------------------------------
 
 		//Infusing Furnace
 		GameRegistry.registerBlock(infusingFurnace, "infusingFurnace");
@@ -67,8 +79,14 @@ public class ToolManager {
 		GameRegistry.registerItem(endiumSword, "enderSword");
 		GameRegistry.registerItem(spidiumSword, "spiderSword");
 		GameRegistry.registerItem(blaziumSword, "blazeSword");
+		
+		//Picks
+		GameRegistry.registerItem(creeperPick, "creeperPick");
+		GameRegistry.registerItem(endiumPick, "enderPick");
+		GameRegistry.registerItem(spidiumPick, "spiderPick");
+		GameRegistry.registerItem(blaziumPick, "blazePick");
 
-		//Naming
+		//Naming-----------------------------------------------------------------------------
 
 		//Infusing Furnace
 		LanguageRegistry.addName(infusingFurnace, "Infusing Furnace");
@@ -84,6 +102,12 @@ public class ToolManager {
 		LanguageRegistry.addName(endiumSword, "Endium Sword");
 		LanguageRegistry.addName(spidiumSword, "Spidium Sword");
 		LanguageRegistry.addName(blaziumSword, "Blazium Sword");
+		
+		//Picks
+		LanguageRegistry.addName(creeperPick, "Creepium Pick");
+		LanguageRegistry.addName(endiumPick, "Endium Pick");
+		LanguageRegistry.addName(spidiumPick, "Spidium Pick");
+		LanguageRegistry.addName(blaziumPick, "Blazium Pick");
 	}
 
 	public static void registerCraftingRecipes()

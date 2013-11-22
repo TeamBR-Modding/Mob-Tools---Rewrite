@@ -1,5 +1,7 @@
 package com.pauljoda.mobtools.infusion;
 
+import com.pauljoda.mobtools.lib.Reference;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -14,10 +16,10 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 
-	private static final int[] slots_top = new int[] {0};
-	private static final int[] slots_bottom = new int[] {2, 1};
+	private static final int[] slots_top = new int[] {1};
+	private static final int[] slots_bottom = new int[] {2};
 	private static final int[] slots_sides = new int[] {1};
-	
+
 	/**
 	 * The ItemStacks that hold the items currently being used in the furnace
 	 */
@@ -30,7 +32,7 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 
 	/** The number of ticks that the current item has been cooking for */
 	public int furnaceCookTime = 0;
-	
+
 	//I'm lying, it's used
 	@SuppressWarnings("unused")
 	private String field_94130_e;
@@ -55,11 +57,11 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 	 * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
 	 * new stack.
 	 */
-	
-	
+
+
 	public int getInfusingSpeed()
 	{
-		int output = 2000;
+		int output = 8000;
 		int dir = (worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
 		int depthMultiplier = ((dir == 2 || dir == 4) ? 1 : -1);
 		boolean forwardZ = ((dir == 2) || (dir == 3));
@@ -76,7 +78,7 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 
 		for(int horiz = -2; horiz <= 2; horiz++)    // Horizontal (X or Z)
 		{
-			for(int vert = 0; vert <= 3; vert++)   // Vertical (Y)
+			for(int vert = -1; vert <= 3; vert++)   // Vertical (Y)
 			{
 				for(int depth = -2; depth <= 2; depth++) // Depth (Z or X)
 				{
@@ -91,15 +93,22 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 						if(depth == 0)  // Looking at self, move on!
 							continue;
 					}
-					
-					if(blockId == Block.bookShelf.blockID)
-						output =  output - 100;
-					
-					if(blockId == Block.skull.blockID)
-						output = output - 500;
-					
-					if(output <= 0)
-						output = 10;
+					if(vert == -1)
+					{
+						if(blockId == Block.slowSand.blockID)
+							output = output - 100;
+					}
+					else
+					{
+						if(blockId == Block.bookShelf.blockID)
+							output =  output - 100;
+
+						if(blockId == Block.skull.blockID)
+							output = output - 500;
+
+						if(output <= 0)
+							output = 10;
+					}
 				}
 			}
 		}	
@@ -396,7 +405,7 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 
 	public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
 	{
-		return par1 == 2 ? false : (par1 == 1 ? par2ItemStack == (new ItemStack(Item.ingotIron)) : true);
+		return par1 == 2 ? false : ((par1 == 1 && Reference.isValidFusee(par2ItemStack)) ? true : true);
 	}
 
 	public int[] getAccessibleSlotsFromSide(int par1)
