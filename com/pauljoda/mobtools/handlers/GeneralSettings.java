@@ -36,6 +36,12 @@ public class GeneralSettings {
 	public static int spidiumPickID;
 	public static int blaziumPickID;
 	
+	//Shovels
+	public static int creeperShovelID;
+	public static int endiumShovelID;
+	public static int spidiumShovelID;
+	public static int blaziumShovelID;
+	
 	private static Configuration config;
 
 	public static void init(File configFile) {
@@ -71,6 +77,12 @@ public class GeneralSettings {
 			endiumPickID = config.getItem("Endium PickAxe ID", 810).getInt();
 			spidiumPickID = config.getItem("Spidium PickAxe ID", 811).getInt();
 			blaziumPickID = config.getItem("Blazium PickAxe ID", 812).getInt();
+			
+			//Shovels
+			creeperShovelID = config.getItem("Creeper Shovel ID", 813).getInt();
+			endiumShovelID = config.getItem("Endium Shovel ID", 814).getInt();
+			spidiumShovelID = config.getItem("Spidium Shovel ID", 815).getInt();
+			blaziumShovelID = config.getItem("Blazium Shovel ID", 816).getInt();
 			
 		}
 		catch (Exception e) {

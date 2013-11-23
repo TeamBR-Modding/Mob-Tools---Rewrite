@@ -75,6 +75,21 @@ public class RecipiesInfuser {
 	        		return new ItemStack(ToolManager.blaziumPick, 1);
 	        }
 	        
+	        else if(item2.itemID == Item.shovelIron.itemID)
+	        {
+	        	if(item.itemID == Item.gunpowder.itemID)
+	        		return new ItemStack(ToolManager.creeperShovel, 1);
+	        	
+	        	if(item.itemID == Item.enderPearl.itemID)
+	        		return new ItemStack(ToolManager.endiumShovel, 1);
+	        	
+	        	if(item.itemID == Item.spiderEye.itemID)
+	        		return new ItemStack(ToolManager.spidiumShovel, 1);
+	        	
+	        	if(item.itemID == Item.blazeRod.itemID)
+	        		return new ItemStack(ToolManager.blaziumShovel, 1);
+	        }
+	        
 	        return null;
 	    }
 

@@ -35,6 +35,12 @@ public class ToolManager {
 	public static Item endiumPick = null;
 	public static Item spidiumPick = null;
 	public static Item blaziumPick = null;
+	
+	//Shovels
+	public static Item creeperShovel = null;
+	public static Item endiumShovel = null;
+	public static Item spidiumShovel = null;
+	public static Item blaziumShovel = null;
 
 	public static void registerTools()
 	{
@@ -61,7 +67,12 @@ public class ToolManager {
 		endiumPick = new MobToolsPick(GeneralSettings.endiumPickID, MobTools.ENDER_TOOL_MATERIAL, "enderPick", endium.itemID, 2);
 		spidiumPick = new MobToolsPick(GeneralSettings.spidiumPickID, MobTools.SPIDER_TOOL_MATERIAL, "spiderPick", spidium.itemID, 3);
 		blaziumPick = new MobToolsPick(GeneralSettings.blaziumPickID, MobTools.BLAZE_TOOL_MATERIAL, "blazePick", blazium.itemID, 4);
-
+		
+		//Shovel
+		creeperShovel = new MobToolsShovel(GeneralSettings.creeperShovelID, MobTools.CREEPER_TOOL_MATERIAL, "creeperShovel", creepium.itemID, 1);
+		endiumShovel = new MobToolsShovel(GeneralSettings.endiumShovelID, MobTools.ENDER_TOOL_MATERIAL, "enderShovel", endium.itemID, 2);
+		spidiumShovel = new MobToolsShovel(GeneralSettings.spidiumShovelID, MobTools.SPIDER_TOOL_MATERIAL, "spiderShovel", spidium.itemID, 3);
+		blaziumShovel = new MobToolsShovel(GeneralSettings.blaziumShovelID, MobTools.BLAZE_TOOL_MATERIAL, "blazeShovel", blazium.itemID, 4);
 		//Registering---------------------------------------------------------------------
 
 		//Infusing Furnace
@@ -85,6 +96,12 @@ public class ToolManager {
 		GameRegistry.registerItem(endiumPick, "enderPick");
 		GameRegistry.registerItem(spidiumPick, "spiderPick");
 		GameRegistry.registerItem(blaziumPick, "blazePick");
+		
+		//Shovels
+		GameRegistry.registerItem(creeperShovel, "creeperShovel");
+		GameRegistry.registerItem(endiumShovel, "enderShovel");
+		GameRegistry.registerItem(spidiumShovel, "spiderShovel");
+		GameRegistry.registerItem(blaziumShovel, "blazeShovel");
 
 		//Naming-----------------------------------------------------------------------------
 
@@ -108,6 +125,12 @@ public class ToolManager {
 		LanguageRegistry.addName(endiumPick, "Endium Pick");
 		LanguageRegistry.addName(spidiumPick, "Spidium Pick");
 		LanguageRegistry.addName(blaziumPick, "Blazium Pick");
+		
+		//Shovels
+		LanguageRegistry.addName(creeperShovel, "Creepium Shovel");
+		LanguageRegistry.addName(endiumShovel, "Endium Shovel");
+		LanguageRegistry.addName(spidiumShovel, "Spidium Shovel");
+		LanguageRegistry.addName(blaziumShovel, "Blazium Shovel");
 	}
 
 	public static void registerCraftingRecipes()
