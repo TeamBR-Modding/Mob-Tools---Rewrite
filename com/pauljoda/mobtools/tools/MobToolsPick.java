@@ -80,7 +80,6 @@ public class MobToolsPick extends ItemPickaxe {
 				break;
 			}
 
-
 			for (int xPos = x - xRange; xPos <= x + xRange; xPos++)
 			{
 				for (int yPos = y - yRange; yPos <= y + yRange; yPos++)
@@ -95,18 +94,24 @@ public class MobToolsPick extends ItemPickaxe {
 
 						if (hlvl <= 2 && localHardness - 1.5 <= blockHardness)
 						{
+							
 							boolean cancelHarvest = false;
 
 							if (!cancelHarvest)
 							{
 								if (localBlock != null && !(localHardness < 0))
 								{
-
+								
 									if (!player.capabilities.isCreativeMode)
 									{	
+										
+										
 										if (localBlock.removeBlockByPlayer(world, player, xPos, yPos, zPos))
 										{
 
+											if(stack.getItemDamage() == stack.getMaxDamage())
+												return false;
+											
 											localBlock.onBlockDestroyedByPlayer(world, xPos, yPos, zPos, localMeta);
 										}
 
@@ -149,13 +154,13 @@ public class MobToolsPick extends ItemPickaxe {
 			int level = 0;
 			if(ench != null)
 			{
-				for (int i = 0; i < ench.tagCount(); i++)
+				for (int x1 = 0; x1 < ench.tagCount(); x1++)
 				{
-					NBTTagCompound nbt = (NBTTagCompound) ench.tagAt(x);
-					int id = nbt.getInteger("id");
+					NBTTagCompound nbt = (NBTTagCompound) ench.tagAt(x1);
+					int id = nbt.getShort("id");
 					if (id == Enchantment.fortune.effectId)
 					{
-						level = nbt.getInteger("lvl");
+						level = nbt.getShort("lvl");
 					}
 				}
 			}
@@ -170,6 +175,7 @@ public class MobToolsPick extends ItemPickaxe {
 				{
 					return false;
 				}
+				
 				ItemStack copy = item.copy();
 
 				world1.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F,
@@ -180,7 +186,6 @@ public class MobToolsPick extends ItemPickaxe {
 				world1.setBlock(x, y, z, 0);
 				if(!world1.isRemote)
 				{
-
 					world1.playSoundEffect(x, y, z, "random.pop", .5F, 1.0F);
 					player.playSound("random.pop", .5F, 1.0F);
 					player.inventory.addItemStackToInventory(copy);
@@ -229,13 +234,13 @@ public class MobToolsPick extends ItemPickaxe {
 			int level1 = 0;
 			if(ench1 != null)
 			{
-				for (int i = 0; i < ench1.tagCount(); i++)
+				for (int x1 = 0; x1 < ench1.tagCount(); x1++)
 				{
-					NBTTagCompound nbt = (NBTTagCompound) ench1.tagAt(x);
-					int id = nbt.getInteger("id");
+					NBTTagCompound nbt = (NBTTagCompound) ench1.tagAt(x1);
+					int id = nbt.getShort("id");
 					if (id == Enchantment.fortune.effectId)
 					{
-						level1 = nbt.getInteger("lvl");
+						level1 = nbt.getShort("lvl");
 					}
 				}
 			}

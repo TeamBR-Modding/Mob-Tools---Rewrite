@@ -35,7 +35,7 @@ public class ToolHandler {
 			else
 				z = (int)player.posZ - r.nextInt(15);
 
-			y = (int)player.posY + r.nextInt(3);
+			y = (int)player.posY;
 
 			if(world.isAirBlock(x, y, z) || world.isAirBlock(x, y - 1, z))
 			{
@@ -81,43 +81,47 @@ public class ToolHandler {
 
 		switch(swordType)
 		{
-		case (1) : par2World.createExplosion(par3EntityPlayer, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, 5.0F, false);
-		par1ItemStack.damageItem(5, par3EntityPlayer);
+		case (1) :
+			par2World.createExplosion(par3EntityPlayer, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, 5.0F, false);
+			par1ItemStack.damageItem(5, par3EntityPlayer);
 		break;
 
-		case (2) : randomTeleport(par3EntityPlayer, par2World);
-		par1ItemStack.damageItem(5, par3EntityPlayer);
+		case (2) : 
+			randomTeleport(par3EntityPlayer, par2World);
+			par1ItemStack.damageItem(5, par3EntityPlayer);
 		break;
 
-		case (3) : if(par3EntityPlayer.isSneaking())
-		{
-			if(par3EntityPlayer.isInvisible())
+		case (3) : 
+			if(par3EntityPlayer.isSneaking())
 			{
-				par3EntityPlayer.setInvisible(false);
-				par3EntityPlayer.playSound("random.pop", 2.0F, 1.0F);
+				if(par3EntityPlayer.isInvisible())
+				{
+					par3EntityPlayer.setInvisible(false);
+					par3EntityPlayer.playSound("random.pop", 2.0F, 1.0F);
+				}
+				else
+				{
+					par3EntityPlayer.setInvisible(true);
+					par3EntityPlayer.playSound("random.pop", 2.0F, 1.0F);
+				}
 			}
-			else
-			{
-				par3EntityPlayer.setInvisible(true);
-				par3EntityPlayer.playSound("random.pop", 2.0F, 1.0F);
-			}
-		}
 		par1ItemStack.damageItem(1, par3EntityPlayer);
 		break;
 
-		case (4) : if(par3EntityPlayer.isSneaking())
-		{
-			par3EntityPlayer.extinguish();
-			par3EntityPlayer.playSound("random.extinguish", 2.0F, 1.0F);
-			par1ItemStack.damageItem(1, par3EntityPlayer);
-		}
+		case (4) : 
+			if(par3EntityPlayer.isSneaking())
+			{
+				par3EntityPlayer.extinguish();
+				par3EntityPlayer.playSound("random.extinguish", 2.0F, 1.0F);
+				par1ItemStack.damageItem(1, par3EntityPlayer);
+			}
 		break;
 
 		default : break;
 
 		}
 	}
-	
+
 
 
 	public static MovingObjectPosition raytraceFromEntity (World world, Entity player, boolean par3, double range)

@@ -42,7 +42,7 @@ public class ToolManager {
 
 		//Infusing Furnace
 		infusingFurnace = new BlockInfusingFurnace(GeneralSettings.infusingFurnace, false).setUnlocalizedName("infusingFurnace").setCreativeTab(MobTools.tabMobTools);
-		infusingFurnaceActive = new BlockInfusingFurnace(GeneralSettings.infusingFurnaceActive, true).setUnlocalizedName("infusingFurnaceActive");
+		infusingFurnaceActive = new BlockInfusingFurnace(GeneralSettings.infusingFurnaceActive, true).setUnlocalizedName("infusingFurnaceActive").setLightValue(5.0F);
 		
 		//Ingots
 		creepium = new MobToolsIngots(GeneralSettings.creepium, "creepium");

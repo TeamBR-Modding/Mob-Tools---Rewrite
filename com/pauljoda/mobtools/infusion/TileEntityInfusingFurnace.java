@@ -1,5 +1,7 @@
 package com.pauljoda.mobtools.infusion;
 
+import java.util.Random;
+
 import com.pauljoda.mobtools.lib.Reference;
 
 import cpw.mods.fml.relauncher.Side;
@@ -61,7 +63,7 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 
 	public int getInfusingSpeed()
 	{
-		int output = 8000;
+		int output = 10000;
 		int dir = (worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
 		int depthMultiplier = ((dir == 2 || dir == 4) ? 1 : -1);
 		boolean forwardZ = ((dir == 2) || (dir == 3));
@@ -115,6 +117,113 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 
 		return output;
 	}
+
+
+	public void spawnParticles()
+	{
+		Random r = new Random();
+		int dir = (worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
+		int depthMultiplier = ((dir == 2 || dir == 4) ? 1 : -1);
+		boolean forwardZ = ((dir == 2) || (dir == 3));
+
+		/*
+		 *          FORWARD     BACKWARD
+		 * North:   -z              +z
+		 * South:   +z              -z
+		 * East:    +x              -x
+		 * West:    -x              +x
+		 * 
+		 * Should move BACKWARD for depth (facing = direction of block face, not direction of player looking at face)
+		 */
+
+		for(int horiz = -2; horiz <= 2; horiz++)    // Horizontal (X or Z)
+		{
+			for(int vert = -1; vert <= 3; vert++)   // Vertical (Y)
+			{
+				for(int depth = -2; depth <= 2; depth++) // Depth (Z or X)
+				{
+					int x = xCoord + (forwardZ ? horiz : (depth * depthMultiplier));
+					int y = yCoord + vert;
+					int z = zCoord + (forwardZ ? (depth * depthMultiplier) : horiz);
+
+					int blockId = worldObj.getBlockId(x, y, z);
+
+					if(horiz == 0 && vert == 0)
+					{
+						if(depth == 0)  // Looking at self, move on!
+							continue;
+					}
+
+					else
+					{
+						if(blockId == Block.bookShelf.blockID)
+						{
+
+							for (int l = this.xCoord - 2; l <= this.xCoord + 2; ++l)
+							{
+								for (int i1 = this.zCoord - 2; i1 <= this.zCoord + 2; ++i1)
+								{
+									if (l > this.xCoord - 2 && l < this.xCoord + 2 && i1 == this.zCoord - 1)
+									{
+										i1 = this.zCoord + 2;
+									}
+
+									if (r.nextInt(50) == 0)
+									{
+										for (int j1 = this.yCoord; j1 <= this.yCoord + 2; ++j1)
+										{
+											if (worldObj.getBlockId(l, j1, i1) == Block.bookShelf.blockID)
+											{
+												if (!worldObj.isAirBlock((l - this.xCoord) / 2 + this.xCoord, j1, (i1 - this.zCoord) / 2 + this.zCoord))
+												{
+													break;
+												}
+
+												worldObj.spawnParticle("enchantmenttable", (double)this.xCoord + 0.5D, (double)this.yCoord + 2.0D, (double)this.zCoord + 0.5D, (double)((float)(l - this.xCoord) + r.nextFloat()) - 0.5D, (double)((float)(j1 - this.yCoord) - r.nextFloat() - 1.0F), (double)((float)(i1 - this.zCoord) + r.nextFloat()) - 0.5D);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					if(blockId == Block.skull.blockID);
+					{
+
+						for (int l = this.xCoord - 2; l <= this.xCoord + 2; ++l)
+						{
+							for (int i1 = this.zCoord - 2; i1 <= this.zCoord + 2; ++i1)
+							{
+								if (l > this.xCoord - 2 && l < this.xCoord + 2 && i1 == this.zCoord - 1)
+								{
+									i1 = this.zCoord + 2;
+								}
+
+								if (r.nextInt(50) == 0)
+								{
+									for (int j1 = this.yCoord; j1 <= this.yCoord + 1; ++j1)
+									{
+										if (worldObj.getBlockId(l, j1, i1) == Block.skull.blockID)
+										{
+											if (!worldObj.isAirBlock((l - this.xCoord) / 2 + this.xCoord, j1, (i1 - this.zCoord) / 2 + this.zCoord))
+											{
+												break;
+											}
+
+											worldObj.spawnParticle("enchantmenttable", (double)this.xCoord + 0.5D, (double)this.yCoord + 2.0D, (double)this.zCoord + 0.5D, (double)((float)(l - this.xCoord) + r.nextFloat()) - 0.5D, (double)((float)(j1 - this.yCoord) - r.nextFloat() - 1.0F), (double)((float)(i1 - this.zCoord) + r.nextFloat()) - 0.5D);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+			}
+		}
+	}
+
 
 	public ItemStack decrStackSize(int par1, int par2)
 	{
@@ -275,6 +384,8 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 	 */
 	public void updateEntity()
 	{
+	
+
 		boolean var1 = this.furnaceCookTime > 0;
 		boolean var2 = false;
 

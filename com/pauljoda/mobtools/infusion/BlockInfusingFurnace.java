@@ -127,32 +127,33 @@ public class BlockInfusingFurnace extends BlockContainer{
 	{
 		if (this.isActive)
 		{
-			int var6 = par1World.getBlockMetadata(par2, par3, par4);
-			float var7 = (float)par2 + 0.5F;
-			float var8 = (float)par3 + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;
-			float var9 = (float)par4 + 0.5F;
-			float var10 = 0.52F;
-			float var11 = par5Random.nextFloat() * 0.6F - 0.3F;
+			super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 
-			if (var6 == 4)
+			for (int l = par2 - 2; l <= par2 + 2; ++l)
 			{
-				par1World.spawnParticle("smoke", (double)(var7 - var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("flame", (double)(var7 - var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-			}
-			else if (var6 == 5)
-			{
-				par1World.spawnParticle("smoke", (double)(var7 + var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("flame", (double)(var7 + var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
-			}
-			else if (var6 == 2)
-			{
-				par1World.spawnParticle("smoke", (double)(var7 + var11), (double)var8, (double)(var9 - var10), 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("flame", (double)(var7 + var11), (double)var8, (double)(var9 - var10), 0.0D, 0.0D, 0.0D);
-			}
-			else if (var6 == 3)
-			{
-				par1World.spawnParticle("smoke", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D);
-				par1World.spawnParticle("flame", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D);
+				for (int i1 = par4 - 2; i1 <= par4 + 2; ++i1)
+				{
+					if (l > par2 - 2 && l < par2 + 2 && i1 == par4 - 1)
+					{
+						i1 = par4 + 2;
+					}
+
+					if (par5Random.nextInt(1) == 0)
+					{
+						for (int j1 = par3; j1 <= par3 + 2; ++j1)
+						{
+							if (par1World.getBlockId(l, j1, i1) == Block.bookShelf.blockID || par1World.getBlockId(l, j1, i1) == Block.skull.blockID)
+							{
+								if (!par1World.isAirBlock((l - par2) / 2 + par2, j1, (i1 - par4) / 2 + par4))
+								{
+									break;
+								}
+
+								par1World.spawnParticle("enchantmenttable", (double)par2 + 0.5D, (double)par3 + 2.0D, (double)par4 + 0.5D, (double)((float)(l - par2) + par5Random.nextFloat()) - 0.5D, (double)((float)(j1 - par3) - par5Random.nextFloat() - 1.0F), (double)((float)(i1 - par4) + par5Random.nextFloat()) - 0.5D);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -162,25 +163,25 @@ public class BlockInfusingFurnace extends BlockContainer{
 	 * Called upon block activation (right click on the block.)
 	 */
 	@Override
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
-        if (par1World.isRemote)
-        {
-            return true;
-        }
-        else
-        {
-            TileEntityInfusingFurnace tileentityfurnace = (TileEntityInfusingFurnace)par1World.getBlockTileEntity(par2, par3, par4);
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	{
+		if (par1World.isRemote)
+		{
+			return true;
+		}
+		else
+		{
+			TileEntityInfusingFurnace tileentityfurnace = (TileEntityInfusingFurnace)par1World.getBlockTileEntity(par2, par3, par4);
 
-            if (tileentityfurnace != null)
-            {
-            	tileentityfurnace.getInfusingSpeed();
-                par5EntityPlayer.openGui(MobTools.instance, 0, par1World, par2, par3, par4);
-            }
+			if (tileentityfurnace != null)
+			{
+				tileentityfurnace.getInfusingSpeed();
+				par5EntityPlayer.openGui(MobTools.instance, 0, par1World, par2, par3, par4);
+			}
 
-            return true;
-        }
-    }
+			return true;
+		}
+	}
 
 	/**
 	 * Update which block ID the furnace is using depending on whether or not it is burning
