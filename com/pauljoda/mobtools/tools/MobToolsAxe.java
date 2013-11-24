@@ -14,7 +14,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,11 +23,12 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-public class MobToolsPick extends ItemPickaxe {
+public class MobToolsAxe extends ItemAxe {
 
 	int ingot;
 	int type;
-	public MobToolsPick(int par1, EnumToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type) {
+
+	public MobToolsAxe(int par1, EnumToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type) {
 		super(par1, par2EnumToolMaterial);
 		this.setUnlocalizedName(unlocalized);
 		this.setCreativeTab(MobTools.tabMobTools);
@@ -38,7 +39,7 @@ public class MobToolsPick extends ItemPickaxe {
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player)
 	{
-		//Pick Types:
+		//Axe Types:
 		//1: Creeper
 		//2: Ender
 		//3: Spider
@@ -64,22 +65,22 @@ public class MobToolsPick extends ItemPickaxe {
 				if(mop == null)
 					break;
 
-				int xRange = 1;
-				int yRange = 1;
-				int zRange = 1;
+				int xRange = 3;
+				int yRange = 3;
+				int zRange = 3;
 				switch (mop.sideHit)
 				{
 				case 0:
 				case 1:
-					yRange = 0;
+					yRange = 3;
 					break;
 				case 2:
 				case 3:
-					zRange = 0;
+					zRange = 3;
 					break;
 				case 4:
 				case 5:
-					xRange = 0;
+					xRange = 3;
 					break;
 				}
 
@@ -92,7 +93,7 @@ public class MobToolsPick extends ItemPickaxe {
 							int localblockID = world.getBlockId(xPos, yPos, zPos);
 							Block localBlock = Block.blocksList[localblockID];
 							int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
-							int hlvl = MinecraftForge.getBlockHarvestLevel(localBlock, meta, "pickaxe");
+							int hlvl = MinecraftForge.getBlockHarvestLevel(localBlock, meta, "axe");
 							float localHardness = localBlock == null ? Float.MAX_VALUE : localBlock.getBlockHardness(world, xPos, yPos, zPos);
 
 							if (hlvl <= 2 && localHardness - 1.5 <= blockHardness)
@@ -149,7 +150,6 @@ public class MobToolsPick extends ItemPickaxe {
 				}
 			else
 				return false;
-	
 		case 2 : 
 			World world1 = player.worldObj;
 			int blockID1 = world1.getBlockId(x, y, z);
@@ -207,28 +207,34 @@ public class MobToolsPick extends ItemPickaxe {
 			int blockID3 = world3.getBlockId(x, y, z);
 			int meta3 = world3.getBlockMetadata(x, y, z);
 
-			ItemStack items2 = new ItemStack(Block.blocksList[world3.getBlockId(x, y, z)], 1, meta3);
-
-			world3.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F,
-					Block.blocksList[blockID3].stepSound.getBreakSound(),
-					(Block.blocksList[blockID3].stepSound.getVolume() + 1.0F) / 2.0F,
-					Block.blocksList[blockID3].stepSound.getPitch() * 0.8F);
-
-			world3.setBlock(x, y, z, 0);
-			if(!world3.isRemote)
+			if(Block.blocksList[blockID3] != null && getStrVsBlock(stack, Block.blocksList[blockID3], meta3) > 1.0F || Block.blocksList[blockID3] == Block.leaves)
 			{
-				ItemStack fineTouch = items2.copy();
-				float f = world3.rand.nextFloat() * 0.8F + 0.1F;
-				float f1 = world3.rand.nextFloat() * 0.8F + 0.1F;
-				float f2 = world3.rand.nextFloat() * 0.8F + 0.1F;
+				ItemStack items2 = new ItemStack(Block.blocksList[world3.getBlockId(x, y, z)], 1, meta3);
 
-				EntityItem entityitem = new EntityItem(world3, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), fineTouch);
+				world3.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F,
+						Block.blocksList[blockID3].stepSound.getBreakSound(),
+						(Block.blocksList[blockID3].stepSound.getVolume() + 1.0F) / 2.0F,
+						Block.blocksList[blockID3].stepSound.getPitch() * 0.8F);
 
-				world3.spawnEntityInWorld(entityitem);
+				world3.setBlock(x, y, z, 0);
+				if(!world3.isRemote)
+				{
+					ItemStack fineTouch = items2.copy();
+					float f = world3.rand.nextFloat() * 0.8F + 0.1F;
+					float f1 = world3.rand.nextFloat() * 0.8F + 0.1F;
+					float f2 = world3.rand.nextFloat() * 0.8F + 0.1F;
+
+					EntityItem entityitem = new EntityItem(world3, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), fineTouch);
+
+					world3.spawnEntityInWorld(entityitem);
+				}
+				stack.damageItem(1, player);
+
+				return true;
 			}
-			stack.damageItem(1, player);
+			else
+				return false;
 
-			return true;
 
 		case 4 : 
 			World world11 = player.worldObj;
@@ -287,9 +293,9 @@ public class MobToolsPick extends ItemPickaxe {
 		default : return false;
 
 		}
-
-		return true;
+		return false;
 	}
+
 
 
 	@SideOnly(Side.CLIENT)

@@ -90,6 +90,36 @@ public class RecipiesInfuser {
 	        		return new ItemStack(ToolManager.blaziumShovel, 1);
 	        }
 	        
+	        else if(item2.itemID == Item.axeIron.itemID)
+	        {
+	        	if(item.itemID == Item.gunpowder.itemID)
+	        		return new ItemStack(ToolManager.creeperAxe, 1);
+	        	
+	        	if(item.itemID == Item.enderPearl.itemID)
+	        		return new ItemStack(ToolManager.endiumAxe, 1);
+	        	
+	        	if(item.itemID == Item.spiderEye.itemID)
+	        		return new ItemStack(ToolManager.spidiumAxe, 1);
+	        	
+	        	if(item.itemID == Item.blazeRod.itemID)
+	        		return new ItemStack(ToolManager.blaziumAxe, 1);
+	        }
+	        
+	        else if(item2.itemID == Item.hoeIron.itemID)
+	        {
+	        	if(item.itemID == Item.gunpowder.itemID)
+	        		return new ItemStack(ToolManager.creeperHoe, 1);
+	        	
+	        	if(item.itemID == Item.enderPearl.itemID)
+	        		return new ItemStack(ToolManager.endiumHoe, 1);
+	        	
+	        	if(item.itemID == Item.spiderEye.itemID)
+	        		return new ItemStack(ToolManager.spidiumHoe, 1);
+	        	
+	        	if(item.itemID == Item.blazeRod.itemID)
+	        		return new ItemStack(ToolManager.blaziumHoe, 1);
+	        }
+	        
 	        return null;
 	    }
 

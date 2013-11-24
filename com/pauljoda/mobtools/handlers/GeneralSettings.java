@@ -42,6 +42,18 @@ public class GeneralSettings {
 	public static int spidiumShovelID;
 	public static int blaziumShovelID;
 	
+	//Axes
+	public static int creeperAxeID;
+	public static int endiumAxeID;
+	public static int spidiumAxeID;
+	public static int blaziumAxeID;
+	
+	//Hoes
+	public static int creeperHoeID;
+	public static int endiumHoeID;
+	public static int spidiumHoeID;
+	public static int blaziumHoeID;
+	
 	private static Configuration config;
 
 	public static void init(File configFile) {
@@ -83,6 +95,18 @@ public class GeneralSettings {
 			endiumShovelID = config.getItem("Endium Shovel ID", 814).getInt();
 			spidiumShovelID = config.getItem("Spidium Shovel ID", 815).getInt();
 			blaziumShovelID = config.getItem("Blazium Shovel ID", 816).getInt();
+			
+			//Axes
+			creeperAxeID = config.getItem("Creeper Axe ID", 817).getInt();
+			endiumAxeID = config.getItem("Endium Axe ID", 818).getInt();
+			spidiumAxeID = config.getItem("Spidium Axe ID", 819).getInt();
+			blaziumAxeID = config.getItem("Blazium Axe ID", 820).getInt();
+			
+			//Hoes
+			creeperHoeID = config.getItem("Creeper Hoe ID", 821).getInt();
+			endiumHoeID = config.getItem("Endium Hoe ID", 822).getInt();
+			spidiumHoeID = config.getItem("Spider Hoe ID", 823).getInt();
+			blaziumHoeID = config.getItem("Blazium Hoe ID", 824).getInt();
 			
 		}
 		catch (Exception e) {

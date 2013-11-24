@@ -41,6 +41,18 @@ public class ToolManager {
 	public static Item endiumShovel = null;
 	public static Item spidiumShovel = null;
 	public static Item blaziumShovel = null;
+	
+	//Axes
+	public static Item creeperAxe = null;
+	public static Item endiumAxe = null;
+	public static Item spidiumAxe = null;
+	public static Item blaziumAxe = null;
+	
+	//Hoes
+	public static Item creeperHoe = null;
+	public static Item endiumHoe = null;
+	public static Item spidiumHoe = null;
+	public static Item blaziumHoe = null;
 
 	public static void registerTools()
 	{
@@ -73,6 +85,19 @@ public class ToolManager {
 		endiumShovel = new MobToolsShovel(GeneralSettings.endiumShovelID, MobTools.ENDER_TOOL_MATERIAL, "enderShovel", endium.itemID, 2);
 		spidiumShovel = new MobToolsShovel(GeneralSettings.spidiumShovelID, MobTools.SPIDER_TOOL_MATERIAL, "spiderShovel", spidium.itemID, 3);
 		blaziumShovel = new MobToolsShovel(GeneralSettings.blaziumShovelID, MobTools.BLAZE_TOOL_MATERIAL, "blazeShovel", blazium.itemID, 4);
+		
+		//Axes
+		creeperAxe = new MobToolsAxe(GeneralSettings.creeperAxeID, MobTools.CREEPER_TOOL_MATERIAL, "creeperAxe", creepium.itemID, 1);
+		endiumAxe = new MobToolsAxe(GeneralSettings.endiumAxeID, MobTools.ENDER_TOOL_MATERIAL, "enderAxe", endium.itemID, 2);
+		spidiumAxe = new MobToolsAxe(GeneralSettings.spidiumAxeID, MobTools.SPIDER_TOOL_MATERIAL, "spiderAxe", spidium.itemID, 3);
+		blaziumAxe = new MobToolsAxe(GeneralSettings.blaziumAxeID, MobTools.BLAZE_TOOL_MATERIAL, "blazeAxe", blazium.itemID, 4);
+		
+		//Hoes
+		creeperHoe = new MobToolsHoe(GeneralSettings.creeperHoeID, MobTools.CREEPER_TOOL_MATERIAL, "creeperHoe", creepium.itemID, 1);
+		endiumHoe = new MobToolsHoe(GeneralSettings.endiumHoeID, MobTools.ENDER_TOOL_MATERIAL, "enderHoe", endium.itemID, 2);
+		spidiumHoe = new MobToolsHoe(GeneralSettings.spidiumHoeID, MobTools.SPIDER_TOOL_MATERIAL, "spiderHoe", spidium.itemID, 3);
+		blaziumHoe = new MobToolsHoe(GeneralSettings.blaziumHoeID, MobTools.BLAZE_TOOL_MATERIAL, "blazeHoe", blazium.itemID, 4);
+		
 		//Registering---------------------------------------------------------------------
 
 		//Infusing Furnace
@@ -102,6 +127,18 @@ public class ToolManager {
 		GameRegistry.registerItem(endiumShovel, "enderShovel");
 		GameRegistry.registerItem(spidiumShovel, "spiderShovel");
 		GameRegistry.registerItem(blaziumShovel, "blazeShovel");
+		
+		//Axes
+		GameRegistry.registerItem(creeperAxe, "creeperAxe");
+		GameRegistry.registerItem(endiumAxe, "enderAxe");
+		GameRegistry.registerItem(spidiumAxe, "spiderAxe");
+		GameRegistry.registerItem(blaziumAxe, "blazeAxe");
+		
+		//Hoes
+		GameRegistry.registerItem(creeperHoe, "creeperHoe");
+		GameRegistry.registerItem(endiumHoe, "enderHoe");
+		GameRegistry.registerItem(spidiumHoe, "spiderHoe");
+		GameRegistry.registerItem(blaziumHoe, "blazeHoe");
 
 		//Naming-----------------------------------------------------------------------------
 
@@ -131,6 +168,18 @@ public class ToolManager {
 		LanguageRegistry.addName(endiumShovel, "Endium Shovel");
 		LanguageRegistry.addName(spidiumShovel, "Spidium Shovel");
 		LanguageRegistry.addName(blaziumShovel, "Blazium Shovel");
+		
+		//Axes
+		LanguageRegistry.addName(creeperAxe, "Creepium Axe");
+		LanguageRegistry.addName(endiumAxe, "Endium Axe");
+		LanguageRegistry.addName(spidiumAxe, "Spidium Axe");
+		LanguageRegistry.addName(blaziumAxe, "Blazium Axe");
+		
+		//Hoes
+		LanguageRegistry.addName(creeperHoe, "Creepium Hoe");
+		LanguageRegistry.addName(endiumHoe, "Endium Hoe");
+		LanguageRegistry.addName(spidiumHoe, "Spidium Hoe");
+		LanguageRegistry.addName(blaziumHoe, "Blazium Hoe");
 	}
 
 	public static void registerCraftingRecipes()
