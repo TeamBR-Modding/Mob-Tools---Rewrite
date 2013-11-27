@@ -51,88 +51,61 @@ public class MobToolsAxe extends ItemAxe {
 			World world = player.worldObj;
 			final int blockID = world.getBlockId(x, y, z);
 			final int meta = world.getBlockMetadata(x, y, z);
-			final Block block = Block.blocksList[blockID];
+			Block block = Block.blocksList[blockID];
 
-			if(Block.blocksList[blockID] != null && getStrVsBlock(stack, Block.blocksList[blockID], meta) > 1.0F)
+			if (block == null)
+				return super.onBlockStartBreak(stack, x, y, z, player);
+
+			float blockHardness = block.getBlockHardness(world, x, y, z);
+
+			MovingObjectPosition mop = ToolHandler.raytraceFromEntity(world, player, true, 5.0D);
+			if(mop == null)
+				break;
+
+			int xRange = 1;
+			int yRange = 1;
+			int zRange = 1;
+			switch (mop.sideHit)
 			{
+			case 0:
+			case 1:
+				yRange = 0;
+				break;
+			case 2:
+			case 3:
+				zRange = 0;
+				break;
+			case 4:
+			case 5:
+				xRange = 0;
+				break;
+			}
 
-				if (block == null)
-					return super.onBlockStartBreak(stack, x, y, z, player);
-
-				float blockHardness = block.getBlockHardness(world, x, y, z);
-
-				MovingObjectPosition mop = ToolHandler.raytraceFromEntity(world, player, true, 5.0D);
-				if(mop == null)
-					break;
-
-				int xRange = 3;
-				int yRange = 3;
-				int zRange = 3;
-				switch (mop.sideHit)
+			for (int xPos = x - xRange; xPos <= x + xRange; xPos++)
+			{
+				for (int yPos = y - yRange; yPos <= y + yRange; yPos++)
 				{
-				case 0:
-				case 1:
-					yRange = 3;
-					break;
-				case 2:
-				case 3:
-					zRange = 3;
-					break;
-				case 4:
-				case 5:
-					xRange = 3;
-					break;
-				}
-
-				for (int xPos = x - xRange; xPos <= x + xRange; xPos++)
-				{
-					for (int yPos = y - yRange; yPos <= y + yRange; yPos++)
+					for (int zPos = z - zRange; zPos <= z + zRange; zPos++)
 					{
-						for (int zPos = z - zRange; zPos <= z + zRange; zPos++)
+						if(stack != null)
 						{
-							int localblockID = world.getBlockId(xPos, yPos, zPos);
-							Block localBlock = Block.blocksList[localblockID];
-							int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
-							int hlvl = MinecraftForge.getBlockHarvestLevel(localBlock, meta, "axe");
-							float localHardness = localBlock == null ? Float.MAX_VALUE : localBlock.getBlockHardness(world, xPos, yPos, zPos);
-
-							if (hlvl <= 2 && localHardness - 1.5 <= blockHardness)
+							if(stack.getItemDamage() < stack.getMaxDamage())
 							{
+								int localblockID = world.getBlockId(xPos, yPos, zPos);
+								Block localBlock = Block.blocksList[localblockID];
+								int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
+								int hlvl = MinecraftForge.getBlockHarvestLevel(localBlock, localMeta, "axe");
+								float localHardness = localBlock == null ? Float.MAX_VALUE : localBlock.getBlockHardness(world, xPos, yPos, zPos);
 
-								boolean cancelHarvest = false;
-
-								if (!cancelHarvest)
+								if (hlvl <= 2 && localHardness - 1.5 <= blockHardness)
 								{
-									if (localBlock != null && !(localHardness < 0) && getStrVsBlock(stack, localBlock, meta) > 1.0F)
+									if (localBlock != null && !(localHardness < 0))
 									{
-
-										if (!player.capabilities.isCreativeMode)
-										{	
-
-											if (localBlock.removeBlockByPlayer(world, player, xPos, yPos, zPos))
+										if( getStrVsBlock(stack, Block.blocksList[localblockID], meta) > 1.0F )
+										{
+											if (!player.capabilities.isCreativeMode)
 											{
-												
-												
-												if(stack.getItemDamage() == stack.getMaxDamage())
-													return false;
-
-												localBlock.onBlockDestroyedByPlayer(world, xPos, yPos, zPos, localMeta);
-
-											}
-
-											localBlock.harvestBlock(world, player, xPos, yPos, zPos, localMeta);
-											localBlock.onBlockHarvested(world, xPos, yPos, zPos, localMeta, player);
-											}
-
-											if (blockHardness > 0f)
-											{		
-												if(stack.getItemDamage() == stack.getMaxDamage())
-													return false;
-
-												world.destroyBlock(xPos, yPos, zPos, true); 
-												stack.damageItem(1, player);
-					
-
+												world.destroyBlock(xPos, yPos, zPos, true);
 											}
 											else
 											{
@@ -142,14 +115,15 @@ public class MobToolsAxe extends ItemAxe {
 									}
 								}
 							}
+							else
+								return false;
 						}
 					}
-					if (!world.isRemote)
-						world.playAuxSFX(2001, x, y, z, blockID + (meta << 12));
-					return true;
 				}
-			else
-				return false;
+			}
+			stack.damageItem(1, player);
+			return true;
+
 		case 2 : 
 			World world1 = player.worldObj;
 			int blockID1 = world1.getBlockId(x, y, z);

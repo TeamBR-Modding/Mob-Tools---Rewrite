@@ -24,6 +24,7 @@ import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 
 public class ToolHandler {
+	
 	static Random itemRand = new Random();
 
 	public static void randomTeleport(EntityPlayer player, World world)
@@ -74,8 +75,8 @@ public class ToolHandler {
 		case (2) : break;
 		case (3) : break;
 		case (4) : 	par2EntityLivingBase.setFire(10);
-		par1ItemStack.damageItem(1, par3EntityLivingBase);
-		break;
+					par1ItemStack.damageItem(1, par3EntityLivingBase);
+					break;
 
 		default : break;
 
@@ -95,12 +96,12 @@ public class ToolHandler {
 		{
 		case (1) :
 			par2World.createExplosion(par3EntityPlayer, par3EntityPlayer.posX, par3EntityPlayer.posY, par3EntityPlayer.posZ, 5.0F, false);
-			par1ItemStack.damageItem(5, par3EntityPlayer);
+		par1ItemStack.damageItem(5, par3EntityPlayer);
 		break;
 
 		case (2) : 
 			randomTeleport(par3EntityPlayer, par2World);
-			par1ItemStack.damageItem(5, par3EntityPlayer);
+		par1ItemStack.damageItem(5, par3EntityPlayer);
 		break;
 
 		case (3) : 
@@ -159,169 +160,169 @@ public class ToolHandler {
 		Vec3 vec31 = vec3.addVector((double) f7 * d3, (double) f6 * d3, (double) f8 * d3);
 		return world.rayTraceBlocks_do_do(vec3, vec31, par3, !par3);
 	}
-	
-	
-	 public static boolean applyBonemeal(ItemStack par0ItemStack, World par1World, int par2, int par3, int par4, EntityPlayer player)
-	    {
-	        int l = par1World.getBlockId(par2, par3, par4);
 
-	        BonemealEvent event = new BonemealEvent(player, par1World, l, par2, par3, par4);
-	        if (MinecraftForge.EVENT_BUS.post(event))
-	        {
-	            return false;
-	        }
 
-	        if (event.getResult() == Result.ALLOW)
-	        {
-	            if (!par1World.isRemote)
-	            {
-	                par0ItemStack.damageItem(1, player);
-	            }
-	            return true;
-	        }
+	public static boolean applyBonemeal(ItemStack par0ItemStack, World par1World, int par2, int par3, int par4, EntityPlayer player)
+	{
+		int l = par1World.getBlockId(par2, par3, par4);
 
-	        if (l == Block.sapling.blockID)
-	        {
-	            if (!par1World.isRemote)
-	            {
-	                if ((double)par1World.rand.nextFloat() < 0.45D)
-	                {
-	                    ((BlockSapling)Block.sapling).markOrGrowMarked(par1World, par2, par3, par4, par1World.rand);
-	                }
+		BonemealEvent event = new BonemealEvent(player, par1World, l, par2, par3, par4);
+		if (MinecraftForge.EVENT_BUS.post(event))
+		{
+			return false;
+		}
 
-	                par0ItemStack.damageItem(1, player);
-	            }
+		if (event.getResult() == Result.ALLOW)
+		{
+			if (!par1World.isRemote)
+			{
+				par0ItemStack.damageItem(1, player);
+			}
+			return true;
+		}
 
-	            return true;
-	        }
-	        else if (l != Block.mushroomBrown.blockID && l != Block.mushroomRed.blockID)
-	        {
-	            if (l != Block.melonStem.blockID && l != Block.pumpkinStem.blockID)
-	            {
-	                if (l > 0 && Block.blocksList[l] instanceof BlockCrops)
-	                {
-	                    if (par1World.getBlockMetadata(par2, par3, par4) == 7)
-	                    {
-	                        return false;
-	                    }
-	                    else
-	                    {
-	                        if (!par1World.isRemote)
-	                        {
-	                            ((BlockCrops)Block.blocksList[l]).fertilize(par1World, par2, par3, par4);
-	                            par0ItemStack.damageItem(1, player);
-	                        }
+		if (l == Block.sapling.blockID)
+		{
+			if (!par1World.isRemote)
+			{
+				if ((double)par1World.rand.nextFloat() < 0.45D)
+				{
+					((BlockSapling)Block.sapling).markOrGrowMarked(par1World, par2, par3, par4, par1World.rand);
+				}
 
-	                        return true;
-	                    }
-	                }
-	                else
-	                {
-	                    int i1;
-	                    int j1;
-	                    int k1;
+				par0ItemStack.damageItem(1, player);
+			}
 
-	                    if (l == Block.cocoaPlant.blockID)
-	                    {
-	                        i1 = par1World.getBlockMetadata(par2, par3, par4);
-	                        j1 = BlockDirectional.getDirection(i1);
-	                        k1 = BlockCocoa.func_72219_c(i1);
+			return true;
+		}
+		else if (l != Block.mushroomBrown.blockID && l != Block.mushroomRed.blockID)
+		{
+			if (l != Block.melonStem.blockID && l != Block.pumpkinStem.blockID)
+			{
+				if (l > 0 && Block.blocksList[l] instanceof BlockCrops)
+				{
+					if (par1World.getBlockMetadata(par2, par3, par4) == 7)
+					{
+						return false;
+					}
+					else
+					{
+						if (!par1World.isRemote)
+						{
+							((BlockCrops)Block.blocksList[l]).fertilize(par1World, par2, par3, par4);
+							par0ItemStack.damageItem(1, player);
+						}
 
-	                        if (k1 >= 2)
-	                        {
-	                            return false;
-	                        }
-	                        else
-	                        {
-	                            if (!par1World.isRemote)
-	                            {
-	                                ++k1;
-	                                par1World.setBlockMetadataWithNotify(par2, par3, par4, k1 << 2 | j1, 2);
-	                                par0ItemStack.damageItem(1, player);
-	                            }
+						return true;
+					}
+				}
+				else
+				{
+					int i1;
+					int j1;
+					int k1;
 
-	                            return true;
-	                        }
-	                    }
-	                    else if (l != Block.grass.blockID)
-	                    {
-	                        return false;
-	                    }
-	                    else
-	                    {
-	                        if (!par1World.isRemote)
-	                        {
-	                        	par0ItemStack.damageItem(1, player);
-	                            label102:
+					if (l == Block.cocoaPlant.blockID)
+					{
+						i1 = par1World.getBlockMetadata(par2, par3, par4);
+						j1 = BlockDirectional.getDirection(i1);
+						k1 = BlockCocoa.func_72219_c(i1);
 
-	                            for (i1 = 0; i1 < 128; ++i1)
-	                            {
-	                                j1 = par2;
-	                                k1 = par3 + 1;
-	                                int l1 = par4;
+						if (k1 >= 2)
+						{
+							return false;
+						}
+						else
+						{
+							if (!par1World.isRemote)
+							{
+								++k1;
+								par1World.setBlockMetadataWithNotify(par2, par3, par4, k1 << 2 | j1, 2);
+								par0ItemStack.damageItem(1, player);
+							}
 
-	                                for (int i2 = 0; i2 < i1 / 16; ++i2)
-	                                {
-	                                    j1 += itemRand.nextInt(3) - 1;
-	                                    k1 += (itemRand.nextInt(3) - 1) * itemRand.nextInt(3) / 2;
-	                                    l1 += itemRand.nextInt(3) - 1;
+							return true;
+						}
+					}
+					else if (l != Block.grass.blockID)
+					{
+						return false;
+					}
+					else
+					{
+						if (!par1World.isRemote)
+						{
+							par0ItemStack.damageItem(1, player);
+							label102:
 
-	                                    if (par1World.getBlockId(j1, k1 - 1, l1) != Block.grass.blockID || par1World.isBlockNormalCube(j1, k1, l1))
-	                                    {
-	                                        continue label102;
-	                                    }
-	                                }
+								for (i1 = 0; i1 < 128; ++i1)
+								{
+									j1 = par2;
+									k1 = par3 + 1;
+									int l1 = par4;
 
-	                                if (par1World.getBlockId(j1, k1, l1) == 0)
-	                                {
-	                                    if (itemRand.nextInt(10) != 0)
-	                                    {
-	                                        if (Block.tallGrass.canBlockStay(par1World, j1, k1, l1))
-	                                        {
-	                                            par1World.setBlock(j1, k1, l1, Block.tallGrass.blockID, 1, 3);
-	                                        }
-	                                    }
-	                                    else
-	                                    {
-	                                        ForgeHooks.plantGrass(par1World, j1, k1, l1);
-	                                    }
-	                                }
-	                            }
-	                        }
+									for (int i2 = 0; i2 < i1 / 16; ++i2)
+									{
+										j1 += itemRand.nextInt(3) - 1;
+										k1 += (itemRand.nextInt(3) - 1) * itemRand.nextInt(3) / 2;
+										l1 += itemRand.nextInt(3) - 1;
 
-	                        return true;
-	                    }
-	                }
-	            }
-	            else if (par1World.getBlockMetadata(par2, par3, par4) == 7)
-	            {
-	                return false;
-	            }
-	            else
-	            {
-	                if (!par1World.isRemote)
-	                {
-	                    ((BlockStem)Block.blocksList[l]).fertilizeStem(par1World, par2, par3, par4);
-	                    par0ItemStack.damageItem(1, player);
-	                }
+										if (par1World.getBlockId(j1, k1 - 1, l1) != Block.grass.blockID || par1World.isBlockNormalCube(j1, k1, l1))
+										{
+											continue label102;
+										}
+									}
 
-	                return true;
-	            }
-	        }
-	        else
-	        {
-	            if (!par1World.isRemote)
-	            {
-	                if ((double)par1World.rand.nextFloat() < 0.4D)
-	                {
-	                    ((BlockMushroom)Block.blocksList[l]).fertilizeMushroom(par1World, par2, par3, par4, par1World.rand);
-	                }
+									if (par1World.getBlockId(j1, k1, l1) == 0)
+									{
+										if (itemRand.nextInt(10) != 0)
+										{
+											if (Block.tallGrass.canBlockStay(par1World, j1, k1, l1))
+											{
+												par1World.setBlock(j1, k1, l1, Block.tallGrass.blockID, 1, 3);
+											}
+										}
+										else
+										{
+											ForgeHooks.plantGrass(par1World, j1, k1, l1);
+										}
+									}
+								}
+						}
 
-	                par0ItemStack.damageItem(1, player);
-	            }
+						return true;
+					}
+				}
+			}
+			else if (par1World.getBlockMetadata(par2, par3, par4) == 7)
+			{
+				return false;
+			}
+			else
+			{
+				if (!par1World.isRemote)
+				{
+					((BlockStem)Block.blocksList[l]).fertilizeStem(par1World, par2, par3, par4);
+					par0ItemStack.damageItem(1, player);
+				}
 
-	            return true;
-	        }
-	    }
+				return true;
+			}
+		}
+		else
+		{
+			if (!par1World.isRemote)
+			{
+				if ((double)par1World.rand.nextFloat() < 0.4D)
+				{
+					((BlockMushroom)Block.blocksList[l]).fertilizeMushroom(par1World, par2, par3, par4, par1World.rand);
+				}
+
+				par0ItemStack.damageItem(1, player);
+			}
+
+			return true;
+		}
+	}
 
 }
