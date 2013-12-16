@@ -6,10 +6,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.pauljoda.mobtools.common.CommonProxy;
 import com.pauljoda.mobtools.handlers.ConfigurationHandler;
 import com.pauljoda.mobtools.handlers.LogHelper;
+import com.pauljoda.mobtools.handlers.MobToolsEventHandler;
 import com.pauljoda.mobtools.handlers.VersionHelper;
 import com.pauljoda.mobtools.handlers.VersionTickHandler;
 import com.pauljoda.mobtools.lib.Reference;
@@ -42,13 +44,13 @@ public class MobTools {
 	
 	
 	//Creeper
-	public static EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 2, 150, 10.0F, 10.0F, 0);
+	public static EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 3, 300, 10.0F, 6.0F, 0);
 	//Ender
-	public static EnumToolMaterial ENDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("ENDER_TOOL_MATERIAL", 2, 1600, 8.0F, 5F, 4);
+	public static EnumToolMaterial ENDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("ENDER_TOOL_MATERIAL", 3, 800, 8.0F, 3F, 4);
 	//Blaze
-	public static EnumToolMaterial BLAZE_TOOL_MATERIAL = EnumHelper.addToolMaterial("BLAZE_TOOL_MATERIAL", 2, 400, 9.0F, 6F, 8);
+	public static EnumToolMaterial BLAZE_TOOL_MATERIAL = EnumHelper.addToolMaterial("BLAZE_TOOL_MATERIAL", 3, 400, 9.0F, 4F, 8);
 	//Spider
-	public static EnumToolMaterial SPIDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("SPIDER_TOOL_MATERIAL", 2, 400, 5.0F, 4F, 50);
+	public static EnumToolMaterial SPIDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("SPIDER_TOOL_MATERIAL", 3, 400, 5.0F, 2F, 50);
 	
 	public static CreativeTabs tabMobTools = new CreativeTabs("tabMobTools") {
 		public ItemStack getIconItemStack() {
@@ -76,6 +78,9 @@ public class MobTools {
         // Add Creative Tab
 		LanguageRegistry.instance().addStringLocalization("itemGroup.tabMobTools", "en_US", "Mob Tools");
 		
+		//Add event handler
+		MinecraftForge.EVENT_BUS.register(new MobToolsEventHandler());
+		
 	}
 	
 	@EventHandler
@@ -90,6 +95,7 @@ public class MobTools {
 		
 	    //Lets get Gui
         NetworkRegistry.instance().registerGuiHandler(this, proxy);
+        
 	}
 	
 	@EventHandler

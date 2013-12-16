@@ -110,7 +110,7 @@ public class BlockInfusingFurnace extends BlockContainer{
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int par1, int par2)
 	{
-		return par1 == 3 ? this.mtinfuserBlock : (par1 == 1 ? this.mtinfuserBlockTop : (par1 == 0 ? this.mtinfuserBlockTop : (par1 != par2 ? this.blockIcon : this.mtinfuserBlock)));
+        return par1 == 1 ? this.mtinfuserBlockTop : (par1 == 0 ? this.mtinfuserBlockTop : (par1 != par2 ? this.blockIcon : this.mtinfuserBlock));
 	}
 
 	public void registerIcons(IconRegister par1IconRegister)

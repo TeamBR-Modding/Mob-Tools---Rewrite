@@ -1,6 +1,7 @@
 package com.pauljoda.mobtools.tools;
 
 import com.pauljoda.mobtools.MobTools;
+import com.pauljoda.mobtools.blocks.BlockEnderPad;
 import com.pauljoda.mobtools.handlers.GeneralSettings;
 import com.pauljoda.mobtools.infusion.BlockInfusingFurnace;
 
@@ -53,6 +54,25 @@ public class ToolManager {
 	public static Item endiumHoe = null;
 	public static Item spidiumHoe = null;
 	public static Item blaziumHoe = null;
+	
+	//Wands
+	public static Item creeperWand = null;
+	public static Item endiumWand = null;
+	public static Item spidiumWand = null;
+	public static Item blaziumWand = null;
+	
+	//Items
+	public static Item inertWandCore = null;
+	public static Item goldenrod = null;
+	public static Item creeperWandCore = null;
+	public static Item enderWandCore = null;
+	public static Item spiderWandCore = null;
+	public static Item blazeWandCore = null;
+	public static Item infuser = null;
+	public static Item infuserComplete = null;
+	
+	//Blocks
+	public static Block enderPad = null;
 
 	public static void registerTools()
 	{
@@ -98,6 +118,26 @@ public class ToolManager {
 		spidiumHoe = new MobToolsHoe(GeneralSettings.spidiumHoeID, MobTools.SPIDER_TOOL_MATERIAL, "spiderHoe", spidium.itemID, 3);
 		blaziumHoe = new MobToolsHoe(GeneralSettings.blaziumHoeID, MobTools.BLAZE_TOOL_MATERIAL, "blazeHoe", blazium.itemID, 4);
 		
+		//Wands
+		creeperWand = new MobToolsWand(GeneralSettings.creeperWandID, "creeperWand", 1, 100);
+		endiumWand = new MobToolsWand(GeneralSettings.endiumWandID, "enderWand", 2, 2000);
+		spidiumWand = new MobToolsWand(GeneralSettings.spidiumWandID, "spiderWand", 3, 200);
+		blaziumWand = new MobToolsWand(GeneralSettings.blaziumWandID, "blazeWand", 4, 500);
+		
+		//Items
+		inertWandCore = new MobToolsItem(GeneralSettings.inertWandCoreID, "inertWandCore", false, 64);
+		goldenrod = new MobToolsItem(GeneralSettings.goldenrodID, "goldenrod", false, 64);
+		creeperWandCore = new MobToolsItem(GeneralSettings.creeperWandCoreID, "creeperWandCore", true, 64);
+		enderWandCore = new MobToolsItem(GeneralSettings.enderWandCoreID, "enderWandCore", true, 64);
+		spiderWandCore = new MobToolsItem(GeneralSettings.spiderWandCoreID, "spiderWandCore", true, 64);
+		blazeWandCore = new MobToolsItem(GeneralSettings.blazeWandCoreID, "blazeWandCore", true, 64);
+		infuser = new MobToolsItem(GeneralSettings.infuser, "infuser", false, 1);
+		infuserComplete = new MobToolsItem(GeneralSettings.infuserComplete, "infuserComplete", true, 1);
+		
+		//Blocks
+		enderPad = new BlockEnderPad(GeneralSettings.enderPad);
+		
+		
 		//Registering---------------------------------------------------------------------
 
 		//Infusing Furnace
@@ -139,11 +179,32 @@ public class ToolManager {
 		GameRegistry.registerItem(endiumHoe, "enderHoe");
 		GameRegistry.registerItem(spidiumHoe, "spiderHoe");
 		GameRegistry.registerItem(blaziumHoe, "blazeHoe");
+		
+		//Wands
+		GameRegistry.registerItem(creeperWand, "creeperWand");
+		GameRegistry.registerItem(endiumWand, "enderWand");
+		GameRegistry.registerItem(spidiumWand, "spiderWand");
+		GameRegistry.registerItem(blaziumWand, "blazeWand");
+		
+		//Items
+		GameRegistry.registerItem(inertWandCore, "inertWandCore");
+		GameRegistry.registerItem(goldenrod, "goldenrod");
+		GameRegistry.registerItem(creeperWandCore, "creeperWandCore");
+		GameRegistry.registerItem(enderWandCore, "enderWandCore");
+		GameRegistry.registerItem(spiderWandCore, "spiderWandCore");
+		GameRegistry.registerItem(blazeWandCore, "blazeWandCore");
+		GameRegistry.registerItem(infuser, "infuer");
+		GameRegistry.registerItem(infuserComplete, "infuserComplete");
+		
+		//Blocks
+		GameRegistry.registerBlock(enderPad, "enderPad");
 
 		//Naming-----------------------------------------------------------------------------
 
 		//Infusing Furnace
 		LanguageRegistry.addName(infusingFurnace, "Infusing Furnace");
+		LanguageRegistry.addName(infusingFurnaceActive, "Infusing Furnace");
+
 		
 		//Ingots
 		LanguageRegistry.addName(creepium, "Creepium");
@@ -180,15 +241,59 @@ public class ToolManager {
 		LanguageRegistry.addName(endiumHoe, "Endium Hoe");
 		LanguageRegistry.addName(spidiumHoe, "Spidium Hoe");
 		LanguageRegistry.addName(blaziumHoe, "Blazium Hoe");
+		
+		//Wands
+		LanguageRegistry.addName(creeperWand, "Creeper Wand");
+		LanguageRegistry.addName(endiumWand, "Ender Wand");
+		LanguageRegistry.addName(spidiumWand, "Spider Wand");
+		LanguageRegistry.addName(blaziumWand, "Blaze Wand");
+		
+		//Items
+		LanguageRegistry.addName(inertWandCore, "Inert Wand Core");
+		LanguageRegistry.addName(goldenrod, "Goldenrod");
+		LanguageRegistry.addName(creeperWandCore, "Creeper Wand Core");
+		LanguageRegistry.addName(enderWandCore, "Ender Wand Core");
+		LanguageRegistry.addName(spiderWandCore, "Spider Wand Core");
+		LanguageRegistry.addName(blazeWandCore, "Blaze Wand Core");
+		LanguageRegistry.addName(infuser, "Infuser Core");
+		LanguageRegistry.addName(infuserComplete, "Infuser Core");
+		
+		//Blocks
+		LanguageRegistry.addName(enderPad, "Ender Pad");
 	}
 
 	public static void registerCraftingRecipes()
 	{
 		//Infusing Furnace
+
 		CraftingManager.getInstance().addRecipe(new ItemStack(infusingFurnace, 1),
-				"XXX",
+				"DXD",
 				"XxX",
-				"XXX", 'X', Block.obsidian, 'x', Item.diamond);
+				"DXD", 'X', Block.blockGold, 'x', infuserComplete, 'D', Item.diamond);
+		
+		//Inert Wand Core
+		CraftingManager.getInstance().addRecipe(new ItemStack(inertWandCore, 1),
+				"SRS",
+				"LDL",
+				"SRS", 'S', Block.stone, 'R', Item.redstone, 'L', new ItemStack(Item.dyePowder, 1, 4), 'D', Item.diamond );
+		
+		//Goldenrod
+		CraftingManager.getInstance().addRecipe(new ItemStack(goldenrod , 1),
+				"  G",
+				" G ",
+				"G  ", 'G', Item.ingotGold);
+		
+		//Infuser
+		CraftingManager.getInstance().addRecipe(new ItemStack(infuser, 1), 
+				"GgE",
+				"gDg",
+				"SgB", 'G', Item.gunpowder, 'g', Item.ingotGold, 'E', Item.enderPearl, 'D', Item.diamond, 'S', Item.spiderEye, 'B', Item.blazeRod);
+		
+		//Ender Pad
+		CraftingManager.getInstance().addRecipe(new ItemStack(enderPad, 2), 
+				"WEW",
+				"WWW",
+				"WEW", 'W', Block.cloth, 'E', Item.enderPearl);
 
 	}
 }

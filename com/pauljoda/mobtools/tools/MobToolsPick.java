@@ -1,6 +1,7 @@
 package com.pauljoda.mobtools.tools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.handlers.ToolHandler;
@@ -19,9 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 public class MobToolsPick extends ItemPickaxe {
 
@@ -33,6 +32,7 @@ public class MobToolsPick extends ItemPickaxe {
 		this.setCreativeTab(MobTools.tabMobTools);
 		this.ingot = ingot;
 		this.type = type;
+
 	}
 
 	@Override
@@ -47,83 +47,9 @@ public class MobToolsPick extends ItemPickaxe {
 		switch(type)
 		{
 		case 1 :
-			World world = player.worldObj;
-			final int blockID = world.getBlockId(x, y, z);
-			final int meta = world.getBlockMetadata(x, y, z);
-			Block block = Block.blocksList[blockID];
+			return false;
 
-			if (block == null)
-				return super.onBlockStartBreak(stack, x, y, z, player);
 
-			float blockHardness = block.getBlockHardness(world, x, y, z);
-
-			MovingObjectPosition mop = ToolHandler.raytraceFromEntity(world, player, true, 5.0D);
-			if(mop == null)
-				break;
-
-			int xRange = 1;
-			int yRange = 1;
-			int zRange = 1;
-			switch (mop.sideHit)
-			{
-			case 0:
-			case 1:
-				yRange = 0;
-				break;
-			case 2:
-			case 3:
-				zRange = 0;
-				break;
-			case 4:
-			case 5:
-				xRange = 0;
-				break;
-			}
-
-			for (int xPos = x - xRange; xPos <= x + xRange; xPos++)
-			{
-				for (int yPos = y - yRange; yPos <= y + yRange; yPos++)
-				{
-					for (int zPos = z - zRange; zPos <= z + zRange; zPos++)
-					{
-						if(stack != null)
-						{
-							if(stack.getItemDamage() < stack.getMaxDamage())
-							{
-								int localblockID = world.getBlockId(xPos, yPos, zPos);
-								Block localBlock = Block.blocksList[localblockID];
-								int localMeta = world.getBlockMetadata(xPos, yPos, zPos);
-								int hlvl = MinecraftForge.getBlockHarvestLevel(localBlock, localMeta, "pickaxe");
-								float localHardness = localBlock == null ? Float.MAX_VALUE : localBlock.getBlockHardness(world, xPos, yPos, zPos);
-
-								if (hlvl <= 2 && localHardness - 1.5 <= blockHardness)
-								{
-									if (localBlock != null && !(localHardness < 0))
-									{
-										if( getStrVsBlock(stack, Block.blocksList[localblockID], meta) > 1.0F )
-										{
-											if (!player.capabilities.isCreativeMode)
-											{
-												world.destroyBlock(xPos, yPos, zPos, true);
-											}
-											else
-											{
-												world.setBlockToAir(xPos, yPos, zPos);
-											}
-										}
-									}
-								}
-							}
-							else
-								return false;
-						}
-					}
-				}
-			}
-			stack.damageItem(1, player);
-			return true;
-
-	
 		case 2 : 
 			World world1 = player.worldObj;
 			int blockID1 = world1.getBlockId(x, y, z);
@@ -261,11 +187,35 @@ public class MobToolsPick extends ItemPickaxe {
 		default : return false;
 
 		}
+	}
+	
+	@Override
+	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+	{
+		if(type == 1)
+		{
+			ToolHandler.creeperMine(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, "pickaxe");
+			return true;
+		}
+		return false;
 
-		return true;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		//Information Types
+		//Sword: 1
+		//Pick: 2
+		//Shovel: 3
+		//Hoe: 4
+		//Axe: 5
+		//Wand: 6
+		//Items: 7
 
+		par3List.add("\u00a76" + ToolHandler.getInformation(2, type));
+	}
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {
 		this.itemIcon = iconRegister.registerIcon("mobtools:" + (this.getUnlocalizedName().substring(5)));

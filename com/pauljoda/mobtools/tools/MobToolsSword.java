@@ -1,5 +1,7 @@
 package com.pauljoda.mobtools.tools;
 
+import java.util.List;
+
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.handlers.ToolHandler;
 
@@ -36,10 +38,25 @@ public class MobToolsSword extends ItemSword {
 	@Override
 	 public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
-        
 		ToolHandler.swordBlockEffect(type, par1ItemStack, par2World, par3EntityPlayer);
 		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         return par1ItemStack;
+    }
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    {
+		//Information Types
+		//Sword: 1
+		//Pick: 2
+		//Shovel: 3
+		//Hoe: 4
+		//Axe: 5
+		//Wand: 6
+		//Items: 7
+		
+        par3List.add("\u00a76" + ToolHandler.getInformation(1, type));
     }
 
 	@SideOnly(Side.CLIENT)

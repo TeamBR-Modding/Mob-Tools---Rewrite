@@ -3,7 +3,6 @@ package com.pauljoda.mobtools.infusion;
 import java.util.Random;
 
 import com.pauljoda.mobtools.lib.Reference;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -60,10 +59,9 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 	 * new stack.
 	 */
 
-
 	public int getInfusingSpeed()
 	{
-		int output = 10000;
+		int output = 72000;
 		int dir = (worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord));
 		int depthMultiplier = ((dir == 2 || dir == 4) ? 1 : -1);
 		boolean forwardZ = ((dir == 2) || (dir == 3));
@@ -98,15 +96,15 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 					if(vert == -1)
 					{
 						if(blockId == Block.slowSand.blockID)
-							output = output - 100;
+							output = output - 300;
 					}
 					else
 					{
 						if(blockId == Block.bookShelf.blockID)
-							output =  output - 100;
+							output =  output - 300;
 
 						if(blockId == Block.skull.blockID)
-							output = output - 500;
+							output = output - 6000;
 
 						if(output <= 0)
 							output = 10;
@@ -464,11 +462,6 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 			{
 				this.furnaceItemStacks[2] = var1.copy();
 			}
-			else if (this.furnaceItemStacks[2].isItemEqual(var1))
-			{
-				furnaceItemStacks[2].stackSize += var1.stackSize;
-			}
-
 			--this.furnaceItemStacks[0].stackSize;
 			--this.furnaceItemStacks[1].stackSize;
 

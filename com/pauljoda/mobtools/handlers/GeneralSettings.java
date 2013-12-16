@@ -54,6 +54,29 @@ public class GeneralSettings {
 	public static int spidiumHoeID;
 	public static int blaziumHoeID;
 	
+	//Wands
+	public static int creeperWandID;
+	public static int endiumWandID;
+	public static int spidiumWandID;
+	public static int blaziumWandID;
+	
+	//Items
+	public static int inertWandCoreID;
+	public static int goldenrodID;
+	public static int creeperWandCoreID;
+	public static int enderWandCoreID;
+	public static int spiderWandCoreID;
+	public static int blazeWandCoreID;
+	public static int infuser;
+	public static int infuserComplete;
+	
+	//Blocks
+	public static int enderPad;
+	
+	//Values
+	public static int maxEnderPadDistance;
+	
+	
 	private static Configuration config;
 
 	public static void init(File configFile) {
@@ -107,6 +130,31 @@ public class GeneralSettings {
 			endiumHoeID = config.getItem("Endium Hoe ID", 822).getInt();
 			spidiumHoeID = config.getItem("Spider Hoe ID", 823).getInt();
 			blaziumHoeID = config.getItem("Blazium Hoe ID", 824).getInt();
+			
+			//Wands
+			creeperWandID = config.getItem("Creeper Wand ID",  825).getInt();
+			endiumWandID = config.getItem("Endium Wand ID", 826).getInt();
+			spidiumWandID = config.getItem("Spidium Wand ID", 827).getInt();
+			blaziumWandID = config.getItem("Blazium Wand ID", 828).getInt();
+			
+			//Items
+			inertWandCoreID = config.getItem("Inert Core ID", 829).getInt();
+			goldenrodID = config.getItem("GoldenRod ID", 830).getInt();
+			creeperWandCoreID = config.getItem("Creeper Wand Core", 831).getInt();
+			enderWandCoreID = config.getItem("Ender Wand Core ID", 832).getInt();
+			spiderWandCoreID = config.getItem("Spider Wand Core ID", 833).getInt();
+			blazeWandCoreID = config.getItem("Blaze Wand Core ID", 834).getInt();
+			infuser = config.getItem("Infuer", 835).getInt();
+			infuserComplete = config.getItem("Infuser Complete", 836).getInt();
+			
+			//Blocks
+			enderPad = config.getBlock("Ender Pad", 840).getInt();
+			
+			//Vaules
+			maxEnderPadDistance = config.get(CATEGORY_GENERAL, "Max Ender Pad Distance", 25).getInt();
+					
+			
+			
 			
 		}
 		catch (Exception e) {

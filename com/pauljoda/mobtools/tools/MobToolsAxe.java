@@ -1,6 +1,7 @@
 package com.pauljoda.mobtools.tools;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.handlers.ToolHandler;
@@ -271,6 +272,21 @@ public class MobToolsAxe extends ItemAxe {
 	}
 
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    {
+		//Information Types
+		//Sword: 1
+		//Pick: 2
+		//Shovel: 3
+		//Hoe: 4
+		//Axe: 5
+		//Wand: 6
+		//Items: 7
+		
+        par3List.add("\u00a76" + ToolHandler.getInformation(5, type));
+    }
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister iconRegister) {

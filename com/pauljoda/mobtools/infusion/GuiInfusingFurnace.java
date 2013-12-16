@@ -8,7 +8,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-public class GuiInfusingFurnace extends GuiContainer{
+public class GuiInfusingFurnace extends GuiContainer {
     
     private TileEntityInfusingFurnace furnaceInventory;
     private static final ResourceLocation field_110410_t = new ResourceLocation("mobtools:textures/infuser.png");

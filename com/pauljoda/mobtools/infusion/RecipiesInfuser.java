@@ -28,7 +28,7 @@ public class RecipiesInfuser {
 	            return null;
 	        }
 
-	        if(item2.itemID == Item.ingotIron.itemID)
+	        if(item2.itemID == Item.diamond.itemID)
 	        {
 	        	if(item.itemID == Item.gunpowder.itemID)
 	        		return new ItemStack(ToolManager.creepium, 1);
@@ -44,7 +44,7 @@ public class RecipiesInfuser {
 	        	
 	        }
 	        
-	        else if(item2.itemID == Item.swordIron.itemID)
+	        else if(item2.itemID == Item.swordDiamond.itemID  && !item2.isItemDamaged())
 	        {
 	        	if(item.itemID == Item.gunpowder.itemID)
 	        		return new ItemStack(ToolManager.creeperSword, 1);
@@ -60,7 +60,7 @@ public class RecipiesInfuser {
 	        	
 	        }
 	        
-	        else if(item2.itemID == Item.pickaxeIron.itemID)
+	        else if(item2.itemID == Item.pickaxeDiamond.itemID && !item2.isItemDamaged())
 	        {
 	        	if(item.itemID == Item.gunpowder.itemID)
 	        		return new ItemStack(ToolManager.creeperPick, 1);
@@ -75,7 +75,7 @@ public class RecipiesInfuser {
 	        		return new ItemStack(ToolManager.blaziumPick, 1);
 	        }
 	        
-	        else if(item2.itemID == Item.shovelIron.itemID)
+	        else if(item2.itemID == Item.shovelDiamond.itemID && !item2.isItemDamaged())
 	        {
 	        	if(item.itemID == Item.gunpowder.itemID)
 	        		return new ItemStack(ToolManager.creeperShovel, 1);
@@ -90,7 +90,7 @@ public class RecipiesInfuser {
 	        		return new ItemStack(ToolManager.blaziumShovel, 1);
 	        }
 	        
-	        else if(item2.itemID == Item.axeIron.itemID)
+	        else if(item2.itemID == Item.axeDiamond.itemID && !item2.isItemDamaged())
 	        {
 	        	if(item.itemID == Item.gunpowder.itemID)
 	        		return new ItemStack(ToolManager.creeperAxe, 1);
@@ -105,7 +105,7 @@ public class RecipiesInfuser {
 	        		return new ItemStack(ToolManager.blaziumAxe, 1);
 	        }
 	        
-	        else if(item2.itemID == Item.hoeIron.itemID)
+	        else if(item2.itemID == Item.hoeDiamond.itemID && !item2.isItemDamaged())
 	        {
 	        	if(item.itemID == Item.gunpowder.itemID)
 	        		return new ItemStack(ToolManager.creeperHoe, 1);
@@ -118,6 +118,36 @@ public class RecipiesInfuser {
 	        	
 	        	if(item.itemID == Item.blazeRod.itemID)
 	        		return new ItemStack(ToolManager.blaziumHoe, 1);
+	        }
+	        
+	        else if(item2.itemID == ToolManager.inertWandCore.itemID)
+	        {
+	        	if(item.itemID == Item.gunpowder.itemID)
+	        		return new ItemStack(ToolManager.creeperWandCore, 1);
+	        	
+	        	if(item.itemID == Item.enderPearl.itemID)
+	        		return new ItemStack(ToolManager.enderWandCore, 1);
+	        	
+	        	if(item.itemID == Item.spiderEye.itemID)
+	        		return new ItemStack(ToolManager.spiderWandCore, 1);
+	        	
+	        	if(item.itemID == Item.blazeRod.itemID)
+	        		return new ItemStack(ToolManager.blazeWandCore, 1);
+	        }
+	        
+	        else if(item2.itemID == ToolManager.goldenrod.itemID)
+	        {
+	        	if(item.itemID == ToolManager.creeperWandCore.itemID)
+	        		return new ItemStack(ToolManager.creeperWand, 1);
+	        	
+	        	if(item.itemID == ToolManager.enderWandCore.itemID)
+	        		return new ItemStack(ToolManager.endiumWand, 1);
+	        	
+	        	if(item.itemID == ToolManager.spiderWandCore.itemID)
+	        		return new ItemStack(ToolManager.spidiumWand, 1);
+	        	
+	        	if(item.itemID == ToolManager.blazeWandCore.itemID)
+	        		return new ItemStack(ToolManager.blaziumWand, 1);
 	        }
 	        
 	        return null;
@@ -146,7 +176,9 @@ public class RecipiesInfuser {
 
 	
 		public static boolean isInput(ItemStack itemstack1) {
-			if(itemstack1.itemID == Item.gunpowder.itemID || itemstack1.itemID == Item.enderPearl.itemID || itemstack1.itemID == Item.spiderEye.itemID || itemstack1.itemID == Item.blazeRod.itemID) 
+			if(itemstack1.itemID == Item.gunpowder.itemID || itemstack1.itemID == Item.enderPearl.itemID || itemstack1.itemID == Item.spiderEye.itemID || itemstack1.itemID == Item.blazeRod.itemID 
+					|| itemstack1.itemID == ToolManager.creeperWandCore.itemID || itemstack1.itemID == ToolManager.enderWandCore.itemID || itemstack1.itemID == ToolManager.spiderWandCore.itemID 
+					|| itemstack1.itemID == ToolManager.blazeWandCore.itemID) 
 				return true;
 			else
 				return false;
