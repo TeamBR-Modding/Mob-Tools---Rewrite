@@ -33,41 +33,6 @@ public class ToolHandler {
 
 	static Random itemRand = new Random();
 
-	public static void randomTeleport(EntityPlayer player, World world)
-	{
-		Random r = new Random();
-		int x, y, z;
-		boolean canSpawn = false;
-		while(!canSpawn)
-		{
-			int mod;
-
-			mod = r.nextInt(2);
-			if(mod == 0)
-				x = (int)player.posX + r.nextInt(15);
-			else
-				x = (int)player.posX - r.nextInt(15);
-
-			mod = r.nextInt(2);
-			if(mod == 0)
-				z = (int)player.posZ + r.nextInt(15);
-			else
-				z = (int)player.posZ - r.nextInt(15);
-
-			y = (int)player.posY + 1;
-
-			if(!player.isInWater())
-			{
-				if(world.isAirBlock(x, y, z) && world.isAirBlock(x, y - 1, z))
-				{
-					player.setPositionAndUpdate(x, y, z);
-					player.playSound("mob.endermen.portal", 2.0F, 1.0F);
-					canSpawn = true;
-
-				}
-			}
-		}
-	}
 
 	public static void wandEffect(ItemStack itemstack, World world, EntityPlayer entityplayer, int type)
 	{
@@ -81,7 +46,8 @@ public class ToolHandler {
 		{
 
 		case 1:
-			world.newExplosion(entityplayer, entityplayer.posX, entityplayer.posY, entityplayer.posZ, 2, false, true);
+			if(!world.isRemote)
+				world.createExplosion(entityplayer, entityplayer.posX, entityplayer.posY, entityplayer.posZ, 2.0F, true);
 
 			if(!entityplayer.capabilities.isCreativeMode)
 				itemstack.damageItem(1, entityplayer);

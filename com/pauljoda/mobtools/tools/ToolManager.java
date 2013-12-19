@@ -2,6 +2,7 @@ package com.pauljoda.mobtools.tools;
 
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.blocks.BlockEnderPad;
+import com.pauljoda.mobtools.blocks.BlockMobToolsSpawner;
 import com.pauljoda.mobtools.handlers.GeneralSettings;
 import com.pauljoda.mobtools.infusion.BlockInfusingFurnace;
 
@@ -70,9 +71,11 @@ public class ToolManager {
 	public static Item blazeWandCore = null;
 	public static Item infuser = null;
 	public static Item infuserComplete = null;
+	public static Item powerCore = null;
 	
 	//Blocks
 	public static Block enderPad = null;
+	public static Block mobToolsSpawner = null;
 
 	public static void registerTools()
 	{
@@ -83,10 +86,10 @@ public class ToolManager {
 		infusingFurnaceActive = new BlockInfusingFurnace(GeneralSettings.infusingFurnaceActive, true).setUnlocalizedName("infusingFurnaceActive").setLightValue(5.0F);
 		
 		//Ingots
-		creepium = new MobToolsIngots(GeneralSettings.creepium, "creepium");
-		endium = new MobToolsIngots(GeneralSettings.endium, "endium");
-		spidium = new MobToolsIngots(GeneralSettings.spidium, "spidium");
-		blazium = new MobToolsIngots(GeneralSettings.blazium, "blazium");
+		creepium = new MobToolsGems(GeneralSettings.creepium, "creepium");
+		endium = new MobToolsGems(GeneralSettings.endium, "endium");
+		spidium = new MobToolsGems(GeneralSettings.spidium, "spidium");
+		blazium = new MobToolsGems(GeneralSettings.blazium, "blazium");
 
 		//Swords
 		creeperSword = new MobToolsSword(GeneralSettings.creeperSwordID, MobTools.CREEPER_TOOL_MATERIAL, "creeperSword", creepium.itemID, 1);
@@ -133,9 +136,11 @@ public class ToolManager {
 		blazeWandCore = new MobToolsItem(GeneralSettings.blazeWandCoreID, "blazeWandCore", true, 64);
 		infuser = new MobToolsItem(GeneralSettings.infuser, "infuser", false, 1);
 		infuserComplete = new MobToolsItem(GeneralSettings.infuserComplete, "infuserComplete", true, 1);
+		powerCore = new MobToolsItemPowerCore(GeneralSettings.powerCore);
 		
 		//Blocks
 		enderPad = new BlockEnderPad(GeneralSettings.enderPad);
+		mobToolsSpawner = new BlockMobToolsSpawner(GeneralSettings.mobToolsSpawner);
 		
 		
 		//Registering---------------------------------------------------------------------
@@ -188,16 +193,18 @@ public class ToolManager {
 		
 		//Items
 		GameRegistry.registerItem(inertWandCore, "inertWandCore");
-		GameRegistry.registerItem(goldenrod, "goldenrod");
+		GameRegistry.registerItem(goldenrod, "goldenRod");
 		GameRegistry.registerItem(creeperWandCore, "creeperWandCore");
 		GameRegistry.registerItem(enderWandCore, "enderWandCore");
 		GameRegistry.registerItem(spiderWandCore, "spiderWandCore");
 		GameRegistry.registerItem(blazeWandCore, "blazeWandCore");
 		GameRegistry.registerItem(infuser, "infuer");
 		GameRegistry.registerItem(infuserComplete, "infuserComplete");
+		GameRegistry.registerItem(powerCore, "powerCore");
 		
 		//Blocks
 		GameRegistry.registerBlock(enderPad, "enderPad");
+		GameRegistry.registerBlock(mobToolsSpawner, "mobToolsSpawner");
 
 		//Naming-----------------------------------------------------------------------------
 
@@ -257,9 +264,11 @@ public class ToolManager {
 		LanguageRegistry.addName(blazeWandCore, "Blaze Wand Core");
 		LanguageRegistry.addName(infuser, "Infuser Core");
 		LanguageRegistry.addName(infuserComplete, "Infuser Core");
+		LanguageRegistry.addName(powerCore, "Mob Power Core");
 		
 		//Blocks
 		LanguageRegistry.addName(enderPad, "Ender Pad");
+		LanguageRegistry.addName(mobToolsSpawner, "Spawner Cage");
 	}
 
 	public static void registerCraftingRecipes()
@@ -294,7 +303,21 @@ public class ToolManager {
 				"WEW",
 				"WWW",
 				"WEW", 'W', Block.cloth, 'E', Item.enderPearl);
+		
+		//Power Core 
+		CraftingManager.getInstance().addRecipe(new ItemStack(powerCore, 1), 
+				"CIE",
+				"III",
+				"SIB", 'C', creepium, 'I', Item.ingotIron, 'E', endium, 'S', spidium, 'B', blazium);
+		
+		//Erase Power Core
+		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(powerCore, 1), new ItemStack(Item.bucketWater, 1), new ItemStack(powerCore, 1));
 
+		//Spawner Cage
+		CraftingManager.getInstance().addRecipe(new ItemStack(mobToolsSpawner, 1),
+				"BBB",
+				"BGB",
+				"BBB", 'B', Block.fenceIron, 'G', Item.fireballCharge);
 	}
 }
 

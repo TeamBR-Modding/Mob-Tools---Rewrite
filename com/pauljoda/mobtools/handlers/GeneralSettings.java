@@ -69,12 +69,19 @@ public class GeneralSettings {
 	public static int blazeWandCoreID;
 	public static int infuser;
 	public static int infuserComplete;
+	public static int powerCore;
 	
 	//Blocks
 	public static int enderPad;
+	public static int mobToolsSpawner;
 	
 	//Values
 	public static int maxEnderPadDistance;
+	public static int tierZeroKills;
+	public static int tierOneKills;
+	public static int tierTwoKills;
+	public static int tierThreeKills;
+	public static int tierFourKills;
 	
 	
 	private static Configuration config;
@@ -146,12 +153,19 @@ public class GeneralSettings {
 			blazeWandCoreID = config.getItem("Blaze Wand Core ID", 834).getInt();
 			infuser = config.getItem("Infuer", 835).getInt();
 			infuserComplete = config.getItem("Infuser Complete", 836).getInt();
+			powerCore = config.getItem("Power Core", 837).getInt();
 			
 			//Blocks
 			enderPad = config.getBlock("Ender Pad", 840).getInt();
+			mobToolsSpawner = config.getBlock("Mob Tools Spawner", 841).getInt();
 			
 			//Vaules
 			maxEnderPadDistance = config.get(CATEGORY_GENERAL, "Max Ender Pad Distance", 25).getInt();
+			tierZeroKills = config.get(CATEGORY_GENERAL, "Tier 0 Max Kills", 20).getInt();
+			tierOneKills = config.get(CATEGORY_GENERAL, "Tier 1 Max Kills", 100).getInt();
+			tierTwoKills = config.get(CATEGORY_GENERAL, "Tier 2 Max Kills", 300).getInt();
+			tierThreeKills = config.get(CATEGORY_GENERAL, "Tier 3 Max Kills", 400).getInt();
+			tierFourKills = config.get(CATEGORY_GENERAL, "Tier 4 Max Kills", 500).getInt();
 					
 			
 			

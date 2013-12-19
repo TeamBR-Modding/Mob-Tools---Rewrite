@@ -1,5 +1,6 @@
 package com.pauljoda.mobtools.lib;
 
+import com.pauljoda.mobtools.handlers.GeneralSettings;
 import com.pauljoda.mobtools.tools.ToolManager;
 
 import net.minecraft.item.Item;
@@ -29,6 +30,20 @@ public class Reference {
 				return true;
 		}
 		return false;
+	}
+	
+
+	public static int getTierMax(int kills)
+	{
+		switch(kills)
+		{
+		case 0: return GeneralSettings.tierZeroKills;
+		case 1: return GeneralSettings.tierOneKills;
+		case 2: return GeneralSettings.tierTwoKills;
+		case 3: return GeneralSettings.tierThreeKills;
+		case 4: return GeneralSettings.tierFourKills;
+		}
+		return 0;
 	}
 	
 }

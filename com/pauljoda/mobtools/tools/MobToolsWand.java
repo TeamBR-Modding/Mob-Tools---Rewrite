@@ -100,13 +100,13 @@ public class MobToolsWand extends Item {
 					par1ItemStack.stackTagCompound.setInteger("layers", 3);
 					return false;
 				}
-				
+				int blockCheck = par1ItemStack.stackTagCompound.getInteger("block");
 				this.block = par3World.getBlockId(par4, par5, par6);
 				par1ItemStack.stackTagCompound.setInteger("block", this.block);
 				int meta = par3World.getBlockMetadata(par4, par5, par6);
 				par1ItemStack.stackTagCompound.setInteger("meta", meta);
 
-				if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) && par1ItemStack.stackTagCompound.getInteger("layers") != 0)
+				if(blockCheck == par1ItemStack.stackTagCompound.getInteger("block") && par1ItemStack.stackTagCompound.getInteger("layers") != 0)
 				{
 					int layers = par1ItemStack.stackTagCompound.getInteger("layers");
 					if(layers == 5)
