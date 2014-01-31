@@ -2,8 +2,6 @@ package com.pauljoda.mobtools.tools;
 
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.handlers.ToolHandler;
 
@@ -32,6 +30,7 @@ public class MobToolsWand extends Item {
 		this.setUnlocalizedName(unlocalized);
 		setCreativeTab(MobTools.tabMobTools);
 		this.type = type;
+		this.setMaxStackSize(1);
 	}
 
 	@Override

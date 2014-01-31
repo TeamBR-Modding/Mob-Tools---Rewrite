@@ -1,8 +1,7 @@
 package com.pauljoda.mobtools.tileentities;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -13,59 +12,87 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityMobToolsSpawner extends TileEntity implements IInventory {
+import com.pauljoda.mobtools.tools.ToolManager;
+
+public class TileEntityRepairAlter extends TileEntity implements IInventory {
 
 	public ItemStack[] inv;
-	public int cooldown = 0;
-	public int maxCoolDown = 600;
-	public int spawnRate = 1;
-	public String dimension = "Overworld";
-	public int tier = 0;
-	public String mobName = "Pig";
+	int countdown = 20;
 	public boolean isActive = false;
+	Random r = new Random();
 
-	public TileEntityMobToolsSpawner()
+	public TileEntityRepairAlter()
 	{
-		inv = new ItemStack[1];
+		inv = new ItemStack[5];
 	}
-
 
 	@Override
 	public void updateEntity()
 	{
-		if(!worldObj.isRemote && isActive && this.worldObj != null)
+		if(countdown < 0)
 		{
-			if(cooldown < 0 && MobToolsSpawnerLogic.canSpawn(this, worldObj, xCoord, yCoord, zCoord, tier, mobName, dimension))
+			if(checkForGems())
 			{
-				for(int i = 0; i < spawnRate; i++)
-					MobToolsSpawnerLogic.randomSpawn(MobToolsSpawnerLogic.getEntityByName(mobName, worldObj), worldObj, xCoord, yCoord, zCoord);
-				cooldown = maxCoolDown;
+				if(inv[4] != null)
+				{
+					if(inv[4].isItemDamaged())
+					{
+						inv[4].setItemDamage(inv[4].getItemDamage() - 1);
+
+						for(int i = 0; i < 4; i++)
+							inv[i].setItemDamage(inv[i].getItemDamage() + 1);
+
+						isActive = true;
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+					}
+					else
+						isActive = false;
+				}
+				else
+					isActive = false;
 			}
-			--cooldown;
-		}
-		if(MobToolsSpawnerLogic.canSpawn(this, worldObj, xCoord, yCoord, zCoord, tier, mobName, dimension))
-		{
-			this.isActive = true;
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		}
-		else
-		{
-			this.isActive = false;
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			else
+				isActive = false;
+
+
+			countdown = 20;
 		}
 
+		--countdown;
 	}
+
+
+	/**
+	 * Makes Sure that the gems are in the slot
+	 * @return True if gems are in correct slots
+	 */
+	public boolean checkForGems()
+	{
+		if(inv[0] != null && inv[1] != null && inv[2] != null && inv[3] != null)
+		{
+			if(inv[0].itemID == ToolManager.creepium.itemID && inv[1].itemID == ToolManager.endium.itemID
+					&& inv[2].itemID == ToolManager.spidium.itemID && inv[3].itemID == ToolManager.blazium.itemID)
+			{
+				for(int i = 0; i < 4; i++)
+				{
+					if(inv[i].getItemDamage() >= inv[i].getMaxDamage() - 1)
+					{
+						inv[i] = null;
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound)
 	{
 		super.readFromNBT(tagCompound);
-		cooldown = tagCompound.getInteger("cooldown");
-		spawnRate = tagCompound.getInteger("spawnRate");
-		dimension = tagCompound.getString("dimension");
-		mobName = tagCompound.getString("mobName");
-		isActive = tagCompound.getBoolean("isActive");
-		tier = tagCompound.getInteger("Tier");
 
 
 		NBTTagList tagList = tagCompound.getTagList("Inventory");
@@ -82,13 +109,6 @@ public class TileEntityMobToolsSpawner extends TileEntity implements IInventory 
 	public void writeToNBT(NBTTagCompound tagCompound)
 	{
 		super.writeToNBT(tagCompound);
-
-		tagCompound.setInteger("cooldown", cooldown);
-		tagCompound.setInteger("spawnRate", spawnRate);
-		tagCompound.setString("dimension", dimension);
-		tagCompound.setString("mobName", mobName);
-		tagCompound.setBoolean("isActive", isActive);
-		tagCompound.setInteger("Tier", tier);
 
 		NBTTagList itemList = new NBTTagList();
 		for (int i = 0; i < inv.length; i++) {
@@ -115,10 +135,6 @@ public class TileEntityMobToolsSpawner extends TileEntity implements IInventory 
 		readFromNBT(pkt.data);
 	}
 
-	public void sendDescriptionPacket(){
-		PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 64D, worldObj.provider.dimensionId, getDescriptionPacket());
-	}
-
 
 	@Override
 	public int getSizeInventory() {
@@ -135,7 +151,8 @@ public class TileEntityMobToolsSpawner extends TileEntity implements IInventory 
 		inv[slot] = stack;
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
-		}               
+		}  
+		onInventoryChanged();
 	}
 
 	@Override
@@ -165,7 +182,7 @@ public class TileEntityMobToolsSpawner extends TileEntity implements IInventory 
 
 	@Override
 	public int getInventoryStackLimit() {
-		return 1;
+		return 64;
 	}
 
 	@Override
@@ -181,20 +198,18 @@ public class TileEntityMobToolsSpawner extends TileEntity implements IInventory 
 	public void closeChest() {}
 
 	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
+	{
+		return true;
+	}
+
+	@Override
 	public String getInvName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "mobtools.repairalter";
 	}
 
 	@Override
 	public boolean isInvNameLocalized() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

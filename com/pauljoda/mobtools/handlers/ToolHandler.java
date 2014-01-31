@@ -413,6 +413,7 @@ public class ToolHandler {
 		int blazeCore = ToolManager.blazeWandCore.itemID;
 		int infuser = ToolManager.infuser.itemID;
 		int infuserComplete = ToolManager.infuserComplete.itemID;
+		int enderMail = ToolManager.enderMail.itemID;
 
 		switch(i)
 		{
@@ -490,6 +491,8 @@ public class ToolHandler {
 				return "Kill Mobs to Charge";
 			if(type == infuserComplete)
 				return "Completed! Use This to Craft an Infuser";
+			if(type == enderMail)
+				return "Mails Things!";
 
 
 		}
@@ -551,7 +554,7 @@ public class ToolHandler {
 
 								if(localBlock != 0)
 								{
-									if(MinecraftForge.getBlockHarvestLevel(Block.blocksList[localBlock], metaLocal, tool) <= 3)
+									if(MinecraftForge.getBlockHarvestLevel(Block.blocksList[localBlock], metaLocal, tool) <= 3&& Block.blocksList[localBlock].getBlockHardness(world, x, y, z) != -1)
 									{
 										world.destroyBlock(xPos, yPos, zPos, true);
 									}

@@ -70,10 +70,12 @@ public class GeneralSettings {
 	public static int infuser;
 	public static int infuserComplete;
 	public static int powerCore;
+	public static int enderMail;
 	
 	//Blocks
 	public static int enderPad;
 	public static int mobToolsSpawner;
+	public static int repairAlter;
 	
 	//Values
 	public static int maxEnderPadDistance;
@@ -82,6 +84,7 @@ public class GeneralSettings {
 	public static int tierTwoKills;
 	public static int tierThreeKills;
 	public static int tierFourKills;
+	public static boolean displaySender;
 	
 	
 	private static Configuration config;
@@ -154,10 +157,12 @@ public class GeneralSettings {
 			infuser = config.getItem("Infuer", 835).getInt();
 			infuserComplete = config.getItem("Infuser Complete", 836).getInt();
 			powerCore = config.getItem("Power Core", 837).getInt();
+			enderMail = config.getItem("Ender Mail", 797).getInt();
 			
 			//Blocks
 			enderPad = config.getBlock("Ender Pad", 840).getInt();
 			mobToolsSpawner = config.getBlock("Mob Tools Spawner", 841).getInt();
+			repairAlter = config.getBlock("Repair Alter", 842).getInt();
 			
 			//Vaules
 			maxEnderPadDistance = config.get(CATEGORY_GENERAL, "Max Ender Pad Distance", 25).getInt();
@@ -166,6 +171,7 @@ public class GeneralSettings {
 			tierTwoKills = config.get(CATEGORY_GENERAL, "Tier 2 Max Kills", 300).getInt();
 			tierThreeKills = config.get(CATEGORY_GENERAL, "Tier 3 Max Kills", 400).getInt();
 			tierFourKills = config.get(CATEGORY_GENERAL, "Tier 4 Max Kills", 500).getInt();
+			//displaySender = config.get(CATEGORY_GENERAL, "Display Sender of Ender Mail?", true).getBoolean(true);
 					
 			
 			

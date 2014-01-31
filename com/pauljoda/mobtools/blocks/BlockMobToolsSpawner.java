@@ -44,7 +44,6 @@ public class BlockMobToolsSpawner extends BlockContainer {
 					{
 						ItemStack powerCore = player.inventory.getCurrentItem();
 						spawner.mobName = powerCore.stackTagCompound.getString("mobName");
-						spawner.isActive = true;
 						spawner.maxCoolDown = MobToolsSpawnerLogic.getMaxCoolDown(powerCore.stackTagCompound.getInteger("tier"));
 						spawner.spawnRate = powerCore.stackTagCompound.getInteger("tier") + 1;
 						spawner.dimension = MobToolsItemPowerCore.getDimension(powerCore.stackTagCompound.getString("mobName"));
@@ -59,10 +58,26 @@ public class BlockMobToolsSpawner extends BlockContainer {
 		if(player.isSneaking())
 		{
 			player.inventory.addItemStackToInventory(spawner.inv[0]);
-			spawner.isActive = false;
 			spawner.inv[0] = null;
+			spawner.tier = 0;
 		}
 		return true;
+	}
+	@Override
+	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	{
+		TileEntityMobToolsSpawner spawner = (TileEntityMobToolsSpawner)par1World.getBlockTileEntity(par2, par3, par4);
+		if(spawner.isActive)
+		{
+			for(int i = 0; i < 4; i++)
+			{
+				double d1 = (double)((float)par2 + par1World.rand.nextFloat());
+				double d2 = (double)((float)par3 + par1World.rand.nextFloat());
+				double d0 = (double)((float)par4 + par1World.rand.nextFloat());
+				par1World.spawnParticle("smoke", d1, d2, d0, 0.0D, 0.0D, 0.0D);
+				par1World.spawnParticle("flame", d1, d2, d0, 0.0D, 0.0D, 0.0D);
+			}
+		}
 	}
 
 	@Override

@@ -30,7 +30,8 @@ public class MobToolsSword extends ItemSword {
 
 	@Override
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
-	{
+	{		
+		super.hitEntity(par1ItemStack, par2EntityLivingBase, par3EntityLivingBase);
 		ToolHandler.swordEffect(type, par1ItemStack, par2EntityLivingBase, par3EntityLivingBase);
 		return true;
 	}

@@ -91,9 +91,10 @@ public class MobToolsPick extends ItemPickaxe {
 				world1.setBlock(x, y, z, 0);
 				if(!world1.isRemote)
 				{
-					world1.playSoundEffect(x, y, z, "random.pop", .5F, 1.0F);
-					player.playSound("random.pop", .5F, 1.0F);
-					player.inventory.addItemStackToInventory(copy);
+					//world1.playSoundEffect(x, y, z, "random.pop", .5F, 1.0F);
+					//player.playSound("random.pop", .5F, 1.0F);
+					world1.spawnEntityInWorld(new EntityItem(world1, player.posX, player.posY + 2, player.posZ, copy));
+					//player.inventory.addItemStackToInventory(copy);
 				}
 				stack.damageItem(1, player);
 			}

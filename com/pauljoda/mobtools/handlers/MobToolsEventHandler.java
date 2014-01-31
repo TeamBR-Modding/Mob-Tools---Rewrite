@@ -80,16 +80,16 @@ public class MobToolsEventHandler {
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
 									int creeperKills = inv.getStackInSlot(i).stackTagCompound.getInteger("creeperKills") + 1;
-									if(creeperKills < 101)
+									if(creeperKills < 26)
 										inv.getStackInSlot(i).stackTagCompound.setInteger("creeperKills", creeperKills);
 
 									ItemStack par1ItemStack = inv.getStackInSlot(i);
 									if(par1ItemStack.stackTagCompound != null)
 									{
-										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 100;
-										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 100;
-										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 100;
-										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 100;
+										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 25;
+										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 25;
+										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 25;
+										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 25;
 										if(creeper && ender && spider && blaze)
 										{
 											par1ItemStack.stackTagCompound.setBoolean("done", true);
@@ -125,16 +125,16 @@ public class MobToolsEventHandler {
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
 									int enderKills = inv.getStackInSlot(i).stackTagCompound.getInteger("enderKills") + 1;
-									if(enderKills < 101)
+									if(enderKills < 26)
 										inv.getStackInSlot(i).stackTagCompound.setInteger("enderKills", enderKills);
 
 									ItemStack par1ItemStack = inv.getStackInSlot(i);
 									if(par1ItemStack.stackTagCompound != null)
 									{
-										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 100;
-										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 100;
-										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 100;
-										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 100;
+										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 25;
+										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 25;
+										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 25;
+										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 25;
 										if(creeper && ender && spider && blaze)
 										{
 											par1ItemStack.stackTagCompound.setBoolean("done", true);
@@ -170,16 +170,16 @@ public class MobToolsEventHandler {
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
 									int spiderKills = inv.getStackInSlot(i).stackTagCompound.getInteger("spiderKills") + 1;
-									if(spiderKills < 101)
+									if(spiderKills < 26)
 										inv.getStackInSlot(i).stackTagCompound.setInteger("spiderKills", spiderKills);
 
 									ItemStack par1ItemStack = inv.getStackInSlot(i);
 									if(par1ItemStack.stackTagCompound != null)
 									{
-										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 100;
-										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 100;
-										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 100;
-										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 100;
+										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 25;
+										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 25;
+										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 25;
+										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 25;
 										if(creeper && ender && spider && blaze)
 										{
 											par1ItemStack.stackTagCompound.setBoolean("done", true);
@@ -215,16 +215,16 @@ public class MobToolsEventHandler {
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
 									int blazeKills = inv.getStackInSlot(i).stackTagCompound.getInteger("blazeKills") + 1;
-									if(blazeKills < 101)
+									if(blazeKills < 26)
 										inv.getStackInSlot(i).stackTagCompound.setInteger("blazeKills", blazeKills);
 
 									ItemStack par1ItemStack = inv.getStackInSlot(i);
 									if(par1ItemStack.stackTagCompound != null)
 									{
-										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 100;
-										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 100;
-										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 100;
-										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 100;
+										boolean creeper = par1ItemStack.stackTagCompound.getInteger("creeperKills") == 25;
+										boolean ender = par1ItemStack.stackTagCompound.getInteger("enderKills") == 25;
+										boolean spider = par1ItemStack.stackTagCompound.getInteger("spiderKills") == 25;
+										boolean blaze = par1ItemStack.stackTagCompound.getInteger("blazeKills") == 25;
 										if(creeper && ender && spider && blaze)
 										{
 											par1ItemStack.stackTagCompound.setBoolean("done", true);

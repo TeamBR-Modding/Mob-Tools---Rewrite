@@ -53,36 +53,36 @@ public class MobToolsItemPowerCore extends Item {
 
 	public static String getMobName(String mobName)
 	{
-		if(mobName == EntityCow.class.getName())
+		if(mobName.equals(EntityCow.class.getName()))
 			return "Cow";
-		if(mobName == EntityChicken.class.getName())
+		if(mobName.equals(EntityChicken.class.getName()))
 			return "Chicken";
-		if(mobName == EntityPig.class.getName())
+		if(mobName.equals(EntityPig.class.getName()))
 			return "Pig";
-		if(mobName == EntitySheep.class.getName())
+		if(mobName.equals(EntitySheep.class.getName()))
 			return "Sheep";
-		if(mobName == EntityVillager.class.getName())
+		if(mobName.equals(EntityVillager.class.getName()))
 			return "Villager";
-		if(mobName == EntityEnderman.class.getName())
+		if(mobName.equals(EntityEnderman.class.getName()))
 			return "Enderman";
-		if(mobName == EntitySpider.class.getName())
+		if(mobName.equals(EntitySpider.class.getName()))
 			return "Spider";
-		if(mobName == EntityBlaze.class.getName())
+		if(mobName.equals(EntityBlaze.class.getName()))
 			return "Blaze";
-		if(mobName == EntitySkeleton.class.getName())
+		if(mobName.equals(EntitySkeleton.class.getName()))
 			return "Skeleton";
-		if(mobName == EntitySlime.class.getName())
+		if(mobName.equals(EntitySlime.class.getName()))
 			return "Slime";
-		if(mobName == EntityCreeper.class.getName())
+		if(mobName.equals(EntityCreeper.class.getName()))
 			return "Creeper";
-		if(mobName == EntityZombie.class.getName())
+		if(mobName.equals(EntityZombie.class.getName()))
 			return "Zombie";
 		return "Thingy";
 	}
 
 	public static String getDimension(String mobName)
 	{
-		if(mobName == "Blaze")
+		if(mobName.equals("Blaze"))
 			return "Nether";
 		return "Overworld";
 	}

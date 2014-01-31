@@ -18,6 +18,8 @@ public class MobToolsGems extends Item {
 		super(id);
 		this.setUnlocalizedName(unlocalized);
 		setCreativeTab(MobTools.tabMobTools);
+		this.setMaxDamage(8000);
+		this.setMaxStackSize(1);
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

@@ -25,15 +25,15 @@ public class MobToolsSpawnerLogic {
 		int mod;
 		mod = r.nextInt(2);
 		if(mod == 0)
-			x = x + r.nextInt(8);
+			x = x + r.nextInt(4);
 		else
-			x = x - r.nextInt(8);
+			x = x - r.nextInt(4);
 
 		mod = r.nextInt(2);
 		if(mod == 0)
-			z = z + r.nextInt(8);
+			z = z + r.nextInt(4);
 		else
-			z = z - r.nextInt(8);
+			z = z - r.nextInt(4);
 
 		entity.setLocationAndAngles(x, y, z, 360F, 0F);
 		entity.getEntityData().setBoolean("fromMobTools", true);
@@ -43,19 +43,19 @@ public class MobToolsSpawnerLogic {
 	public static Entity getEntityByName(String mobName, World world)
 	{
 
-		if(mobName == "Cow") return new EntityCow(world);
-		if(mobName == "Chicken") return new EntityChicken(world);
-		if(mobName == "Pig") return new EntityPig(world);
-		if(mobName == "Sheep") return new EntitySheep(world);
-		if(mobName == "Villager") return new EntityVillager(world);
-		if(mobName == "Enderman") return new EntityEnderman(world);
-		if(mobName == "Spider") return new EntitySpider(world);
-		if(mobName == "Blaze") return new EntityBlaze(world);
-		if(mobName == "Skeleton") return new EntitySkeleton(world);
-		if(mobName == "Slime") return new EntitySlime(world);
-		if(mobName == "Creeper") return new EntityCreeper(world);
-		if(mobName == "Zombie") return new EntityZombie(world);
-		
+		if(mobName.equals("Cow")) return new EntityCow(world);
+		if(mobName.equals("Chicken")) return new EntityChicken(world);
+		if(mobName.equals("Pig")) return new EntityPig(world);
+		if(mobName.equals("Sheep")) return new EntitySheep(world);
+		if(mobName.equals("Villager")) return new EntityVillager(world);
+		if(mobName.equals("Enderman")) return new EntityEnderman(world);
+		if(mobName.equals("Spider")) return new EntitySpider(world);
+		if(mobName.equals("Blaze")) return new EntityBlaze(world);
+		if(mobName.equals("Skeleton")) return new EntitySkeleton(world);
+		if(mobName.equals("Slime")) return new EntitySlime(world);
+		if(mobName.equals("Creeper")) return new EntityCreeper(world);
+		if(mobName.equals("Zombie")) return new EntityZombie(world);
+
 		return new EntityPig(world);
 	}
 
@@ -63,28 +63,29 @@ public class MobToolsSpawnerLogic {
 	{
 		if(tier == 5 && world.getBlockPowerInput(x, y, z) == 0)
 			return true;
-		else if(dimension != "Nether")
+		else if(!dimension.equals("Nether"))
 		{
 			if(tier == 4)
 			{
 				return true;
 			}
 
-			else if(world.getClosestPlayer((double)x + 0.5D, (double)y, (double)z + 0.5D, 10) != null)
+			if(world.getClosestPlayer((double)x + 0.5D, (double)y, (double)z + 0.5D, 10) != null)
 			{
 				if(tier == 3)
 				{
 					return true;
 				}
 
-				else if(world.getLightBrightness(x, y, z) < 8)
+				if(world.getLightBrightness(x, y, z) < 0.5)
 				{
 					if(tier == 2)
 					{
 						return true;
 					}
-					else if(isAnimal(mobName))
+					if(isAnimal(mobName))
 					{
+
 						if(tier == 1)
 						{
 							return true;
@@ -98,7 +99,7 @@ public class MobToolsSpawnerLogic {
 
 	public static boolean isAnimal(String mobName)
 	{
-		if(mobName == "Cow" || mobName == "Chicken" || mobName == "Pig" || mobName == "Sheep")
+		if(mobName.equals("Cow") || mobName.equals("Chicken") || mobName.equals("Pig") || mobName.equals("Sheep"))
 			return true;
 
 		return false;

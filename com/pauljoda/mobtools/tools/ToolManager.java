@@ -3,6 +3,7 @@ package com.pauljoda.mobtools.tools;
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.blocks.BlockEnderPad;
 import com.pauljoda.mobtools.blocks.BlockMobToolsSpawner;
+import com.pauljoda.mobtools.blocks.BlockRepairAlter;
 import com.pauljoda.mobtools.handlers.GeneralSettings;
 import com.pauljoda.mobtools.infusion.BlockInfusingFurnace;
 
@@ -72,10 +73,12 @@ public class ToolManager {
 	public static Item infuser = null;
 	public static Item infuserComplete = null;
 	public static Item powerCore = null;
+	public static Item enderMail = null;
 	
 	//Blocks
 	public static Block enderPad = null;
 	public static Block mobToolsSpawner = null;
+	public static Block repairAlter = null;
 
 	public static void registerTools()
 	{
@@ -129,7 +132,7 @@ public class ToolManager {
 		
 		//Items
 		inertWandCore = new MobToolsItem(GeneralSettings.inertWandCoreID, "inertWandCore", false, 64);
-		goldenrod = new MobToolsItem(GeneralSettings.goldenrodID, "goldenrod", false, 64);
+		goldenrod = new MobToolsItem(GeneralSettings.goldenrodID, "goldenRod", false, 64);
 		creeperWandCore = new MobToolsItem(GeneralSettings.creeperWandCoreID, "creeperWandCore", true, 64);
 		enderWandCore = new MobToolsItem(GeneralSettings.enderWandCoreID, "enderWandCore", true, 64);
 		spiderWandCore = new MobToolsItem(GeneralSettings.spiderWandCoreID, "spiderWandCore", true, 64);
@@ -137,10 +140,12 @@ public class ToolManager {
 		infuser = new MobToolsItem(GeneralSettings.infuser, "infuser", false, 1);
 		infuserComplete = new MobToolsItem(GeneralSettings.infuserComplete, "infuserComplete", true, 1);
 		powerCore = new MobToolsItemPowerCore(GeneralSettings.powerCore);
+		enderMail = new MobToolsItemEnderMail(GeneralSettings.enderMail, "enderMail");
 		
 		//Blocks
 		enderPad = new BlockEnderPad(GeneralSettings.enderPad);
 		mobToolsSpawner = new BlockMobToolsSpawner(GeneralSettings.mobToolsSpawner);
+		repairAlter = new BlockRepairAlter(GeneralSettings.repairAlter);
 		
 		
 		//Registering---------------------------------------------------------------------
@@ -201,10 +206,12 @@ public class ToolManager {
 		GameRegistry.registerItem(infuser, "infuer");
 		GameRegistry.registerItem(infuserComplete, "infuserComplete");
 		GameRegistry.registerItem(powerCore, "powerCore");
+		GameRegistry.registerItem(enderMail, "enderMail");
 		
 		//Blocks
 		GameRegistry.registerBlock(enderPad, "enderPad");
 		GameRegistry.registerBlock(mobToolsSpawner, "mobToolsSpawner");
+		GameRegistry.registerBlock(repairAlter, "repairAlter");
 
 		//Naming-----------------------------------------------------------------------------
 
@@ -265,10 +272,12 @@ public class ToolManager {
 		LanguageRegistry.addName(infuser, "Infuser Core");
 		LanguageRegistry.addName(infuserComplete, "Infuser Core");
 		LanguageRegistry.addName(powerCore, "Mob Power Core");
+		LanguageRegistry.addName(enderMail, "Ender Mail");
 		
 		//Blocks
 		LanguageRegistry.addName(enderPad, "Ender Pad");
 		LanguageRegistry.addName(mobToolsSpawner, "Spawner Cage");
+		LanguageRegistry.addName(repairAlter, "Repair Alter");
 	}
 
 	public static void registerCraftingRecipes()
@@ -313,11 +322,19 @@ public class ToolManager {
 		//Erase Power Core
 		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(powerCore, 1), new ItemStack(Item.bucketWater, 1), new ItemStack(powerCore, 1));
 
+		//Ender Mail
+		CraftingManager.getInstance().addShapelessRecipe(new ItemStack(enderMail, 8), new ItemStack(Item.enderPearl, 1), new ItemStack(Item.paper, 1));
 		//Spawner Cage
 		CraftingManager.getInstance().addRecipe(new ItemStack(mobToolsSpawner, 1),
 				"BBB",
 				"BGB",
 				"BBB", 'B', Block.fenceIron, 'G', Item.fireballCharge);
+		
+		//Repair Alter
+		CraftingManager.getInstance().addRecipe(new ItemStack(repairAlter, 1), 
+				"GgE",
+				"gDg",
+				"SgB", 'G', Item.gunpowder, 'g', Item.ingotGold, 'E', Item.enderPearl, 'D', Block.anvil, 'S', Item.spiderEye, 'B', Item.blazeRod);
 	}
 }
 

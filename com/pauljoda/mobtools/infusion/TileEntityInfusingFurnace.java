@@ -55,8 +55,7 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 	}
 
 	/**
-	 * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
-	 * new stack.
+	 * Gets the speed based on whats around it
 	 */
 
 	public int getInfusingSpeed()
@@ -116,7 +115,9 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 		return output;
 	}
 
-
+	/**
+	 *Spawns particles from the blocks to the infuser 
+	 */
 	public void spawnParticles()
 	{
 		Random r = new Random();
@@ -461,6 +462,10 @@ public class TileEntityInfusingFurnace extends TileEntity implements IInventory{
 			if (this.furnaceItemStacks[2] == null)
 			{
 				this.furnaceItemStacks[2] = var1.copy();
+			}
+			else if (this.furnaceItemStacks[2].isItemEqual(var1))
+			{
+				furnaceItemStacks[2].stackSize += var1.stackSize;
 			}
 			--this.furnaceItemStacks[0].stackSize;
 			--this.furnaceItemStacks[1].stackSize;

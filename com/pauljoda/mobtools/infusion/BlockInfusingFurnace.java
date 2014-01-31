@@ -41,6 +41,7 @@ public class BlockInfusingFurnace extends BlockContainer{
 	{
 		super(par1, Material.rock);
 		this.isActive = par2;
+		this.setHardness(8F);
 	}
 	@SideOnly(Side.CLIENT)
 	private Icon mtinfuserBlockTop;

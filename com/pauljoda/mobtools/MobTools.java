@@ -12,6 +12,7 @@ import com.pauljoda.mobtools.common.CommonProxy;
 import com.pauljoda.mobtools.handlers.ConfigurationHandler;
 import com.pauljoda.mobtools.handlers.LogHelper;
 import com.pauljoda.mobtools.handlers.MobToolsEventHandler;
+import com.pauljoda.mobtools.handlers.MobToolsPacketHandler;
 import com.pauljoda.mobtools.handlers.VersionHelper;
 import com.pauljoda.mobtools.handlers.VersionTickHandler;
 import com.pauljoda.mobtools.lib.Reference;
@@ -31,7 +32,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(name = Reference.MOD_NAME, modid = Reference.MOD_ID, version = Reference.Version)
-@NetworkMod(channels = { Reference.MOD_NAME },clientSideRequired=true, serverSideRequired=false)
+@NetworkMod(channels = { Reference.MOD_NAME }, clientSideRequired=true, serverSideRequired=false, packetHandler=MobToolsPacketHandler.class)
 
 public class MobTools {
 	
@@ -44,13 +45,13 @@ public class MobTools {
 	
 	
 	//Creeper
-	public static EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 3, 300, 10.0F, 6.0F, 0);
+	public static EnumToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 3, 600, 10.0F, 6.0F, 0);
 	//Ender
-	public static EnumToolMaterial ENDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("ENDER_TOOL_MATERIAL", 3, 800, 8.0F, 3F, 4);
+	public static EnumToolMaterial ENDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("ENDER_TOOL_MATERIAL", 3, 1600, 8.0F, 3F, 4);
 	//Blaze
-	public static EnumToolMaterial BLAZE_TOOL_MATERIAL = EnumHelper.addToolMaterial("BLAZE_TOOL_MATERIAL", 3, 400, 9.0F, 4F, 8);
+	public static EnumToolMaterial BLAZE_TOOL_MATERIAL = EnumHelper.addToolMaterial("BLAZE_TOOL_MATERIAL", 3, 800, 9.0F, 4F, 8);
 	//Spider
-	public static EnumToolMaterial SPIDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("SPIDER_TOOL_MATERIAL", 3, 400, 5.0F, 2F, 50);
+	public static EnumToolMaterial SPIDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("SPIDER_TOOL_MATERIAL", 3, 800, 5.0F, 2F, 50);
 	
 	public static CreativeTabs tabMobTools = new CreativeTabs("tabMobTools") {
 		public ItemStack getIconItemStack() {
