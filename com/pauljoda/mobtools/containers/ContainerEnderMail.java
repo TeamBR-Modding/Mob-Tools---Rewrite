@@ -5,6 +5,7 @@ import java.util.List;
 import com.pauljoda.mobtools.handlers.GeneralSettings;
 
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
@@ -27,8 +28,8 @@ public class ContainerEnderMail extends Container {
 	{
 		this.world = world;
 		this.mail = mail;
-		
-        addSlotToContainer(new Slot(mail, 0, 80, 51));
+
+		addSlotToContainer(new Slot(mail, 0, 80, 51));
 		bindPlayerInventory(inPlayer);
 	}
 
@@ -98,23 +99,27 @@ public class ContainerEnderMail extends Container {
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return true;
 	}
-	
-	public void spawnItemStack(String userName, String sender)
+
+	public boolean spawnItemStack(String userName, String sender)
 	{
-		List<EntityPlayerMP> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-		for(int i = 0; i < players.size(); i++)
+		if(mail.getStackInSlot(0) != null)
 		{
-			EntityPlayerMP recipient = players.get(i);
-			if(recipient.username.equals(userName))
+			List<EntityPlayerMP> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+			for(int i = 0; i < players.size(); i++)
 			{
-				ItemStack mailContents = mail.getStackInSlot(0);
-				EntityItem itemstack = new EntityItem(recipient.worldObj, recipient.posX, recipient.posY + 2, recipient.posZ, mail.getStackInSlot(0));
-				recipient.worldObj.spawnEntityInWorld(itemstack);
-				mail.setInventorySlotContents(0, null);
-				recipient.addChatMessage(EnumChatFormatting.DARK_PURPLE + sender + " has sent you " + mailContents.stackSize + " " + mailContents.getDisplayName());
+				EntityPlayerMP recipient = players.get(i);
+				if(recipient.username.equals(userName))
+				{
+					ItemStack mailContents = mail.getStackInSlot(0);
+					EntityItem itemstack = new EntityItem(recipient.worldObj, recipient.posX, recipient.posY + 2, recipient.posZ, mail.getStackInSlot(0));
+					recipient.worldObj.spawnEntityInWorld(itemstack);
+					mail.setInventorySlotContents(0, null);
+					recipient.addChatMessage(EnumChatFormatting.DARK_PURPLE + sender + " has sent you " + mailContents.stackSize + " " + mailContents.getDisplayName());
+					return true;
+				}	
 			}
-			
 		}
+		return false;
 	}
 
 }

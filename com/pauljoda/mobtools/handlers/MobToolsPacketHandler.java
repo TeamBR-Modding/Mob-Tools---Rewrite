@@ -23,30 +23,36 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
 public class MobToolsPacketHandler implements IPacketHandler {
-	
+
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
 	{
 		ByteArrayDataInput dat = ByteStreams.newDataInput(packet.data);
 		int id = dat.readInt();
-		
+
 		if(id == 0)
 		{
 			String userName = dat.readUTF();
 			EntityPlayer ep = (EntityPlayer)player;
 			ContainerEnderMail mail = (ContainerEnderMail)ep.openContainer;
-			mail.spawnItemStack(userName, ep.username);
-			
+			if(ep.inventory.getCurrentItem().stackSize > 1)
+			{
+				if(mail.spawnItemStack(userName, ep.username))
+					--ep.inventory.getCurrentItem().stackSize;
+			}
+
 			if(ep.inventory.getCurrentItem().stackSize == 1)
 			{
-				ep.inventory.setInventorySlotContents(ep.inventory.currentItem, null);
-				ep.closeScreen();
-				return;
+				if(mail.spawnItemStack(userName, ep.username))
+				{
+					ep.inventory.setInventorySlotContents(ep.inventory.currentItem, null);
+					ep.closeScreen();
+					return;
+				}
 			}
-			--ep.inventory.getCurrentItem().stackSize;
-			
+
 		}
 	}
-	
+
 	public static Packet sendItems(String user)
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
