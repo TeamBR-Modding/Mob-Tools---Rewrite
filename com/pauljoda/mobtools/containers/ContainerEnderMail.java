@@ -111,7 +111,7 @@ public class ContainerEnderMail extends Container {
 				if(recipient.username.equals(userName))
 				{
 					ItemStack mailContents = mail.getStackInSlot(0);
-					EntityItem itemstack = new EntityItem(recipient.worldObj, recipient.posX, recipient.posY + 2, recipient.posZ, mail.getStackInSlot(0));
+					EntityItem itemstack = new EntityItem(recipient.worldObj, recipient.posX, recipient.posY + 2, recipient.posZ, mailContents);
 					recipient.worldObj.spawnEntityInWorld(itemstack);
 					mail.setInventorySlotContents(0, null);
 					recipient.addChatMessage(EnumChatFormatting.DARK_PURPLE + sender + " has sent you " + mailContents.stackSize + " " + mailContents.getDisplayName());

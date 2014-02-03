@@ -150,6 +150,13 @@ public class RecipiesInfuser {
 	        		return new ItemStack(ToolManager.blaziumWand, 1);
 	        }
 	        
+	        else if(item2.itemID == ToolManager.blankAmulet.itemID)
+	        {
+	        	if(item.itemID == Item.blazeRod.itemID)
+	        		return new ItemStack(ToolManager.blazeAmulet, 1);
+
+	        }
+	        
 	        return null;
 	    }
 

@@ -10,7 +10,7 @@ public class Reference {
 	
 	public static final String MOD_ID = "mobtools";
 	public static final String MOD_NAME = "Mob Tools";
-	public static final String Version = "1.8.2";
+	public static final String Version = "1.9";
 	public static final int VERSION_CHECK_ATTEMPTS = 3;
 	public static final String CHANNEL_NAME = MOD_ID;
 	
@@ -19,7 +19,8 @@ public class Reference {
 						Item.diamond.itemID, Item.swordDiamond.itemID,
 						Item.pickaxeDiamond.itemID, Item.shovelDiamond.itemID,
 						Item.hoeDiamond.itemID, Item.axeDiamond.itemID,
-						ToolManager.inertWandCore.itemID, ToolManager.goldenrod.itemID
+						ToolManager.inertWandCore.itemID, ToolManager.goldenrod.itemID,
+						ToolManager.blankAmulet.itemID
 						};
 	
 	public static boolean isValidFusee(ItemStack item)

@@ -76,6 +76,11 @@ public class GeneralSettings {
 	public static int enderPad;
 	public static int mobToolsSpawner;
 	public static int repairAlter;
+	public static int blazeTorch;
+	
+	//Amulets
+	public static int blankAmulet;
+	public static int blazeAmulet;
 	
 	//Values
 	public static int maxEnderPadDistance;
@@ -159,10 +164,15 @@ public class GeneralSettings {
 			powerCore = config.getItem("Power Core", 837).getInt();
 			enderMail = config.getItem("Ender Mail", 797).getInt();
 			
+			//Amulets
+			blankAmulet = config.getItem("Blank Amulet", 838).getInt();
+			blazeAmulet = config.getItem("Blaze Amulet", 839).getInt();
+			
 			//Blocks
 			enderPad = config.getBlock("Ender Pad", 840).getInt();
 			mobToolsSpawner = config.getBlock("Mob Tools Spawner", 841).getInt();
 			repairAlter = config.getBlock("Repair Alter", 842).getInt();
+			blazeTorch = config.getBlock("Blaze Torch", 843).getInt();
 			
 			//Vaules
 			maxEnderPadDistance = config.get(CATEGORY_GENERAL, "Max Ender Pad Distance", 25).getInt();

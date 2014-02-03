@@ -1,6 +1,9 @@
 package com.pauljoda.mobtools.tools;
 
 import com.pauljoda.mobtools.MobTools;
+import com.pauljoda.mobtools.amulets.MobToolsAmulet;
+import com.pauljoda.mobtools.amulets.MobToolsBlazeAmulet;
+import com.pauljoda.mobtools.blocks.BlockBlazeTorch;
 import com.pauljoda.mobtools.blocks.BlockEnderPad;
 import com.pauljoda.mobtools.blocks.BlockMobToolsSpawner;
 import com.pauljoda.mobtools.blocks.BlockRepairAlter;
@@ -75,10 +78,15 @@ public class ToolManager {
 	public static Item powerCore = null;
 	public static Item enderMail = null;
 	
+	//Amulets
+	public static Item blankAmulet = null;
+	public static Item blazeAmulet = null;
+	
 	//Blocks
 	public static Block enderPad = null;
 	public static Block mobToolsSpawner = null;
 	public static Block repairAlter = null;
+	public static Block blazeTorch = null;
 
 	public static void registerTools()
 	{
@@ -142,10 +150,15 @@ public class ToolManager {
 		powerCore = new MobToolsItemPowerCore(GeneralSettings.powerCore);
 		enderMail = new MobToolsItemEnderMail(GeneralSettings.enderMail, "enderMail");
 		
+		//Amulets
+		blankAmulet = new MobToolsAmulet(GeneralSettings.blankAmulet);
+		blazeAmulet = new MobToolsBlazeAmulet(GeneralSettings.blazeAmulet);
+		
 		//Blocks
 		enderPad = new BlockEnderPad(GeneralSettings.enderPad);
 		mobToolsSpawner = new BlockMobToolsSpawner(GeneralSettings.mobToolsSpawner);
 		repairAlter = new BlockRepairAlter(GeneralSettings.repairAlter);
+		blazeTorch = new BlockBlazeTorch(GeneralSettings.blazeTorch);
 		
 		
 		//Registering---------------------------------------------------------------------
@@ -208,10 +221,15 @@ public class ToolManager {
 		GameRegistry.registerItem(powerCore, "powerCore");
 		GameRegistry.registerItem(enderMail, "enderMail");
 		
+		//Amulets
+		GameRegistry.registerItem(blankAmulet, "blankAmulet");
+		GameRegistry.registerItem(blazeAmulet, "blazeAmulet");
+		
 		//Blocks
 		GameRegistry.registerBlock(enderPad, "enderPad");
 		GameRegistry.registerBlock(mobToolsSpawner, "mobToolsSpawner");
 		GameRegistry.registerBlock(repairAlter, "repairAlter");
+		GameRegistry.registerBlock(blazeTorch, "blazeTorch");
 
 		//Naming-----------------------------------------------------------------------------
 
@@ -274,10 +292,15 @@ public class ToolManager {
 		LanguageRegistry.addName(powerCore, "Mob Power Core");
 		LanguageRegistry.addName(enderMail, "Ender Mail");
 		
+		//Amulets
+		LanguageRegistry.addName(blankAmulet, "Blank Amulet");
+		LanguageRegistry.addName(blazeAmulet, "Blaze Amulet");
+		
 		//Blocks
 		LanguageRegistry.addName(enderPad, "Ender Pad");
 		LanguageRegistry.addName(mobToolsSpawner, "Spawner Cage");
 		LanguageRegistry.addName(repairAlter, "Repair Alter");
+		LanguageRegistry.addName(blazeTorch, "Blaze Torch");
 	}
 
 	public static void registerCraftingRecipes()
@@ -335,6 +358,13 @@ public class ToolManager {
 				"GgE",
 				"gDg",
 				"SgB", 'G', Item.gunpowder, 'g', Item.ingotGold, 'E', Item.enderPearl, 'D', Block.anvil, 'S', Item.spiderEye, 'B', Item.blazeRod);
+		
+		//Amulet
+		CraftingManager.getInstance().addRecipe(new ItemStack(blankAmulet, 1),
+				"BBB",
+				"BGB",
+				"BBB", 'B', Item.ingotGold, 'G', Item.glowstone);
+		
 	}
 }
 

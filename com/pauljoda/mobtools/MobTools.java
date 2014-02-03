@@ -81,7 +81,7 @@ public class MobTools {
 		
 		//Add event handler
 		MinecraftForge.EVENT_BUS.register(new MobToolsEventHandler());
-		
+				
 	}
 	
 	@EventHandler
@@ -90,6 +90,7 @@ public class MobTools {
 		//Register Tools
 		ToolManager.registerTools();
 		ToolManager.registerCraftingRecipes();
+		
 		
 		//RegisterTileEntity
 		proxy.registerTileEntities();
