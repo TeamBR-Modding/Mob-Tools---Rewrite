@@ -81,6 +81,9 @@ public class GeneralSettings {
 	//Amulets
 	public static int blankAmulet;
 	public static int blazeAmulet;
+	public static int speedAmulet;
+	public static int jumpAmulet;
+	public static int teleportAmulet;
 	
 	//Values
 	public static int maxEnderPadDistance;
@@ -167,12 +170,15 @@ public class GeneralSettings {
 			//Amulets
 			blankAmulet = config.getItem("Blank Amulet", 838).getInt();
 			blazeAmulet = config.getItem("Blaze Amulet", 839).getInt();
+			speedAmulet = config.getItem("Speed Amulet", 840).getInt();
+			jumpAmulet = config.getItem("Jump Amulet", 841).getInt();
+			teleportAmulet = config.getItem("Teleport Amulet", 842).getInt();
 			
 			//Blocks
-			enderPad = config.getBlock("Ender Pad", 840).getInt();
-			mobToolsSpawner = config.getBlock("Mob Tools Spawner", 841).getInt();
-			repairAlter = config.getBlock("Repair Alter", 842).getInt();
-			blazeTorch = config.getBlock("Blaze Torch", 843).getInt();
+			enderPad = config.getBlock("Ender Pad", 850).getInt();
+			mobToolsSpawner = config.getBlock("Mob Tools Spawner", 851).getInt();
+			repairAlter = config.getBlock("Repair Alter", 852).getInt();
+			blazeTorch = config.getBlock("Blaze Torch", 853).getInt();
 			
 			//Vaules
 			maxEnderPadDistance = config.get(CATEGORY_GENERAL, "Max Ender Pad Distance", 25).getInt();

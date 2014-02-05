@@ -7,66 +7,26 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.pauljoda.mobtools.MobTools;
-import com.pauljoda.mobtools.tools.ToolManager;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class MobToolsBlazeAmulet extends MobToolsAmulet {
+public class MobToolsSpeedAmulet extends MobToolsAmulet {
 
-	public MobToolsBlazeAmulet(int par1) {
+	int cooldown;
+	public MobToolsSpeedAmulet(int par1) {
 		super(par1);
-		this.setUnlocalizedName("blazeAmulet");
+		this.setUnlocalizedName("speedAmulet");
 		this.setCreativeTab(MobTools.tabMobTools);
-		this.setMaxDamage(1000);
-	}
-
-	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10)
-	{
-
-		if (par7 == 0)
-		{
-			--y;
-		}
-
-		if (par7 == 1)
-		{
-			++y;
-		}
-
-		if (par7 == 2)
-		{
-			--z;
-		}
-
-		if (par7 == 3)
-		{
-			++z;
-		}
-
-		if (par7 == 4)
-		{
-			--x;
-		}
-
-		if (par7 == 5)
-		{
-			++x;
-		}
-		if(world.getBlockId(x, y, z) == 0)
-		{
-			world.playSoundAtEntity(player, "random.wood_click", 1.0F, 1.0F);
-			world.setBlock(x, y, z, ToolManager.blazeTorch.blockID);
-			world.markBlockForUpdate(x, y, z);
-			itemstack.damageItem(1, player);
-			return true;
-		}
-		return false;
+		this.setMaxDamage(300);
+		cooldown = 20;
 	}
 
 	@Override
@@ -80,7 +40,7 @@ public class MobToolsBlazeAmulet extends MobToolsAmulet {
 				itemstack.stackTagCompound = new NBTTagCompound();
 				itemstack.stackTagCompound.setBoolean("Active", true);
 				if(!par2World.isRemote)
-					player.addChatMessage(EnumChatFormatting.GREEN + "Auto-Lighting Enabled");
+					player.addChatMessage(EnumChatFormatting.GREEN + "Speed Enabled");
 			}
 			else
 			{
@@ -88,13 +48,13 @@ public class MobToolsBlazeAmulet extends MobToolsAmulet {
 				{
 					itemstack.stackTagCompound.setBoolean("Active", false);
 					if(!par2World.isRemote)
-						player.addChatMessage(EnumChatFormatting.RED + "Auto-Lighting Disabled");
+						player.addChatMessage(EnumChatFormatting.RED + "Speed Disabled");
 				}
 				else
 				{
 					itemstack.stackTagCompound.setBoolean("Active", true);
 					if(!par2World.isRemote)
-						player.addChatMessage(EnumChatFormatting.GREEN + "Auto-Lighting Enabled");
+						player.addChatMessage(EnumChatFormatting.GREEN + "Speed Enabled");
 				}
 
 			}
@@ -105,6 +65,7 @@ public class MobToolsBlazeAmulet extends MobToolsAmulet {
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean isCurrentItem)
 	{
+
 		EntityPlayer player = (EntityPlayer)entity;
 
 		if(itemstack.getItemDamage() >= this.getMaxDamage())
@@ -124,15 +85,19 @@ public class MobToolsBlazeAmulet extends MobToolsAmulet {
 
 		if(itemstack.stackTagCompound != null)
 		{
-			if(world.getLightBrightness((int)player.posX, (int)player.posY, (int)player.posZ)  < .5 && itemstack.stackTagCompound.getBoolean("Active")
-					&& world.getBlockId((int)player.posX, (int)player.posY, (int)player.posZ) == 0)
+			if(itemstack.stackTagCompound.getBoolean("Active"))
 			{
-				world.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ToolManager.blazeTorch.blockID);
-				world.markBlockForUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
-				itemstack.damageItem(1, player);
-
+				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 20, 4, true));
+				player.addPotionEffect(new PotionEffect(Potion.jump.id, 20, 2, true));
+				if(cooldown < 0)
+				{
+					cooldown = 20;
+					itemstack.damageItem(1, player);
+				}
 			}
+
 		}
+		cooldown--;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -140,7 +105,7 @@ public class MobToolsBlazeAmulet extends MobToolsAmulet {
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 
-		par3List.add(EnumChatFormatting.GOLD + "Shift-Right Click to Toggle Auto-Lighting");
+		par3List.add(EnumChatFormatting.GOLD + "Shift-Right Click to Toggle Speed");
 		if (par1ItemStack.stackTagCompound != null)
 		{
 			if(par1ItemStack.stackTagCompound.getBoolean("Active"))

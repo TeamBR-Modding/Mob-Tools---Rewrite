@@ -16,6 +16,7 @@ public class MobToolsAmulet extends Item {
 		super(par1);
 		this.setUnlocalizedName("blankAmulet");
 		this.setCreativeTab(MobTools.tabMobTools);
+		this.setMaxStackSize(1);
 	}
 	
 	@Override

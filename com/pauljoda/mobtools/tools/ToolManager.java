@@ -3,6 +3,9 @@ package com.pauljoda.mobtools.tools;
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.amulets.MobToolsAmulet;
 import com.pauljoda.mobtools.amulets.MobToolsBlazeAmulet;
+import com.pauljoda.mobtools.amulets.MobToolsJumpAmulet;
+import com.pauljoda.mobtools.amulets.MobToolsSpeedAmulet;
+import com.pauljoda.mobtools.amulets.MobToolsTeleportAmulet;
 import com.pauljoda.mobtools.blocks.BlockBlazeTorch;
 import com.pauljoda.mobtools.blocks.BlockEnderPad;
 import com.pauljoda.mobtools.blocks.BlockMobToolsSpawner;
@@ -81,6 +84,9 @@ public class ToolManager {
 	//Amulets
 	public static Item blankAmulet = null;
 	public static Item blazeAmulet = null;
+	public static Item speedAmulet = null;
+	public static Item jumpAmulet = null;
+	public static Item teleportAmulet = null;
 	
 	//Blocks
 	public static Block enderPad = null;
@@ -153,6 +159,9 @@ public class ToolManager {
 		//Amulets
 		blankAmulet = new MobToolsAmulet(GeneralSettings.blankAmulet);
 		blazeAmulet = new MobToolsBlazeAmulet(GeneralSettings.blazeAmulet);
+		speedAmulet = new MobToolsSpeedAmulet(GeneralSettings.speedAmulet);
+		jumpAmulet = new MobToolsJumpAmulet(GeneralSettings.jumpAmulet);
+		teleportAmulet = new MobToolsTeleportAmulet(GeneralSettings.teleportAmulet);
 		
 		//Blocks
 		enderPad = new BlockEnderPad(GeneralSettings.enderPad);
@@ -224,6 +233,9 @@ public class ToolManager {
 		//Amulets
 		GameRegistry.registerItem(blankAmulet, "blankAmulet");
 		GameRegistry.registerItem(blazeAmulet, "blazeAmulet");
+		GameRegistry.registerItem(speedAmulet, "speedAmulet");
+		GameRegistry.registerItem(jumpAmulet, "jumpAmulet");
+		GameRegistry.registerItem(teleportAmulet, "teleportAmulet");
 		
 		//Blocks
 		GameRegistry.registerBlock(enderPad, "enderPad");
@@ -294,7 +306,10 @@ public class ToolManager {
 		
 		//Amulets
 		LanguageRegistry.addName(blankAmulet, "Blank Amulet");
-		LanguageRegistry.addName(blazeAmulet, "Blaze Amulet");
+		LanguageRegistry.addName(blazeAmulet, "Amulet of Illumination");
+		LanguageRegistry.addName(speedAmulet, "Amulet of Speed");
+		LanguageRegistry.addName(jumpAmulet, "Amulet of Lift");
+		LanguageRegistry.addName(teleportAmulet, "Amulet of Memory");
 		
 		//Blocks
 		LanguageRegistry.addName(enderPad, "Ender Pad");
