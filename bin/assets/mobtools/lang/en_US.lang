@@ -55,8 +55,12 @@ item.infuserComplete.name=Complete Infuser
 
 item.powerCore.name=Power Core
 
+item.enderMail.name=Ender Mail
+
 item.blankAmulet.name=Blank Amulet
 item.blazeAmulet.name=Amulet of Illumination
 item.speedAmulet.name=Amulet of Speed
 item.jumpAmulet.name=Amulet of Lift
 item.teleportAmulet.name=Amulet of Memory
+item.magnetAmulet.name=Amulet of Attraction
+item.hungerAmulet.name=Amulet of Sustenance
