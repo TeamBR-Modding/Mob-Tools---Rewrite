@@ -13,6 +13,7 @@ import com.pauljoda.mobtools.common.CommonProxy;
 import com.pauljoda.mobtools.handlers.ConfigurationHandler;
 import com.pauljoda.mobtools.handlers.MobToolsEventHandler;
 import com.pauljoda.mobtools.lib.Reference;
+import com.pauljoda.mobtools.network.PacketPipeline;
 import com.pauljoda.mobtools.tools.ToolManager;
 
 import cpw.mods.fml.common.Mod;
@@ -37,6 +38,8 @@ public class MobTools {
 	
 	@SidedProxy( clientSide="com.pauljoda.mobtools.client.ClientProxy", serverSide="com.pauljoda.mobtools.common.CommonProxy")
 	public static CommonProxy proxy;
+	
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
 	
 	
 	//Creeper
@@ -71,13 +74,15 @@ public class MobTools {
 		//Register Tools
 		ToolManager.registerTools();
 		ToolManager.registerCraftingRecipes();
+	
 				
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
-		
+		//Open Network Pipeline
+		packetPipeline.initalise();
 		
 		//RegisterTileEntity
 		proxy.registerTileEntities();
@@ -88,7 +93,11 @@ public class MobTools {
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {}
+	public void postInit(FMLPostInitializationEvent event) {
+		
+		//Close Network
+		packetPipeline.postInitialise();
+	}
 
 }
 

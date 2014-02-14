@@ -5,6 +5,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.pauljoda.mobtools.common.CommonProxy;
+import com.pauljoda.mobtools.containers.ContainerEnderMail;
+import com.pauljoda.mobtools.containers.InventoryMail;
+import com.pauljoda.mobtools.gui.GuiEnderMail;
 import com.pauljoda.mobtools.gui.GuiRepairAlter;
 import com.pauljoda.mobtools.infusion.GuiInfusingFurnace;
 import com.pauljoda.mobtools.infusion.TileEntityInfusingFurnace;
@@ -22,6 +25,9 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
+		if(id == 6)
+			return new GuiEnderMail((ContainerEnderMail) new ContainerEnderMail(player.inventory, new InventoryMail(player.getHeldItem()), world));
+
 
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 

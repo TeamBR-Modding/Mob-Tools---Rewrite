@@ -3,7 +3,9 @@ package com.pauljoda.mobtools.tools;
 import com.pauljoda.mobtools.MobTools;
 import com.pauljoda.mobtools.amulets.MobToolsAmulet;
 import com.pauljoda.mobtools.amulets.MobToolsBlazeAmulet;
+import com.pauljoda.mobtools.amulets.MobToolsHungerAmulet;
 import com.pauljoda.mobtools.amulets.MobToolsJumpAmulet;
+import com.pauljoda.mobtools.amulets.MobToolsMagnetAmulet;
 import com.pauljoda.mobtools.amulets.MobToolsSpeedAmulet;
 import com.pauljoda.mobtools.amulets.MobToolsTeleportAmulet;
 import com.pauljoda.mobtools.blocks.BlockBlazeTorch;
@@ -89,6 +91,8 @@ public class ToolManager {
 	public static Item speedAmulet = null;
 	public static Item jumpAmulet = null;
 	public static Item teleportAmulet = null;
+	public static Item magnetAmulet = null;
+	public static Item hungerAmulet = null;
 	
 	//Blocks
 	public static Block enderPad = null;
@@ -156,6 +160,7 @@ public class ToolManager {
 		infuser = new MobToolsItem("infuser", false, 1);
 		infuserComplete = new MobToolsItem("infuserComplete", true, 1);
 		powerCore = new MobToolsItemPowerCore();
+		enderMail = new MobToolsItemEnderMail();
 		
 		//Amulets
 		blankAmulet = new MobToolsAmulet();
@@ -163,6 +168,8 @@ public class ToolManager {
 		speedAmulet = new MobToolsSpeedAmulet();
 		jumpAmulet = new MobToolsJumpAmulet();
 		teleportAmulet = new MobToolsTeleportAmulet();
+		magnetAmulet = new MobToolsMagnetAmulet();
+		hungerAmulet = new MobToolsHungerAmulet();
 		
 		//Blocks
 		enderPad = new BlockEnderPad();
@@ -237,6 +244,8 @@ public class ToolManager {
 		GameRegistry.registerItem(speedAmulet, "speedAmulet");
 		GameRegistry.registerItem(jumpAmulet, "jumpAmulet");
 		GameRegistry.registerItem(teleportAmulet, "teleportAmulet");
+		GameRegistry.registerItem(magnetAmulet, "magnetAmulet");
+		GameRegistry.registerItem(hungerAmulet, "hungerAmulet");
 		
 		//Blocks
 		GameRegistry.registerBlock(enderPad, "enderPad");
@@ -244,79 +253,6 @@ public class ToolManager {
 		GameRegistry.registerBlock(repairAlter, "repairAlter");
 		GameRegistry.registerBlock(blazeTorch, "blazeTorch");
 
-		//Naming-----------------------------------------------------------------------------
-/*
-		//Infusing Furnace
-		LanguageRegistry.addName(infusingFurnace, "Infusing Furnace");
-		LanguageRegistry.addName(infusingFurnaceActive, "Infusing Furnace");
-
-		
-		//Ingots
-		LanguageRegistry.addName(creepium, "Creepium");
-		LanguageRegistry.addName(endium, "Endium");
-		LanguageRegistry.addName(spidium, "Spidium");
-		LanguageRegistry.addName(blazium, "Blazium");
-
-		//Swords
-		LanguageRegistry.addName(creeperSword, "Creepium Sword");
-		LanguageRegistry.addName(endiumSword, "Endium Sword");
-		LanguageRegistry.addName(spidiumSword, "Spidium Sword");
-		LanguageRegistry.addName(blaziumSword, "Blazium Sword");
-		
-		//Picks
-		LanguageRegistry.addName(creeperPick, "Creepium Pick");
-		LanguageRegistry.addName(endiumPick, "Endium Pick");
-		LanguageRegistry.addName(spidiumPick, "Spidium Pick");
-		LanguageRegistry.addName(blaziumPick, "Blazium Pick");
-		
-		//Shovels
-		LanguageRegistry.addName(creeperShovel, "Creepium Shovel");
-		LanguageRegistry.addName(endiumShovel, "Endium Shovel");
-		LanguageRegistry.addName(spidiumShovel, "Spidium Shovel");
-		LanguageRegistry.addName(blaziumShovel, "Blazium Shovel");
-		
-		//Axes
-		LanguageRegistry.addName(creeperAxe, "Creepium Axe");
-		LanguageRegistry.addName(endiumAxe, "Endium Axe");
-		LanguageRegistry.addName(spidiumAxe, "Spidium Axe");
-		LanguageRegistry.addName(blaziumAxe, "Blazium Axe");
-		
-		//Hoes
-		LanguageRegistry.addName(creeperHoe, "Creepium Hoe");
-		LanguageRegistry.addName(endiumHoe, "Endium Hoe");
-		LanguageRegistry.addName(spidiumHoe, "Spidium Hoe");
-		LanguageRegistry.addName(blaziumHoe, "Blazium Hoe");
-		
-		//Wands
-		LanguageRegistry.addName(creeperWand, "Creeper Wand");
-		LanguageRegistry.addName(endiumWand, "Ender Wand");
-		LanguageRegistry.addName(spidiumWand, "Spider Wand");
-		LanguageRegistry.addName(blaziumWand, "Blaze Wand");
-		
-		//Items
-		LanguageRegistry.addName(inertWandCore, "Inert Wand Core");
-		LanguageRegistry.addName(goldenrod, "Goldenrod");
-		LanguageRegistry.addName(creeperWandCore, "Creeper Wand Core");
-		LanguageRegistry.addName(enderWandCore, "Ender Wand Core");
-		LanguageRegistry.addName(spiderWandCore, "Spider Wand Core");
-		LanguageRegistry.addName(blazeWandCore, "Blaze Wand Core");
-		LanguageRegistry.addName(infuser, "Infuser Core");
-		LanguageRegistry.addName(infuserComplete, "Infuser Core");
-		LanguageRegistry.addName(powerCore, "Mob Power Core");
-		LanguageRegistry.addName(enderMail, "Ender Mail");
-		
-		//Amulets
-		LanguageRegistry.addName(blankAmulet, "Blank Amulet");
-		LanguageRegistry.addName(blazeAmulet, "Amulet of Illumination");
-		LanguageRegistry.addName(speedAmulet, "Amulet of Speed");
-		LanguageRegistry.addName(jumpAmulet, "Amulet of Lift");
-		LanguageRegistry.addName(teleportAmulet, "Amulet of Memory");
-		
-		//Blocks
-		LanguageRegistry.addName(enderPad, "Ender Pad");
-		LanguageRegistry.addName(mobToolsSpawner, "Spawner Cage");
-		LanguageRegistry.addName(repairAlter, "Repair Alter");
-		LanguageRegistry.addName(blazeTorch, "Blaze Torch");*/
 	}
 
 	public static void registerCraftingRecipes()

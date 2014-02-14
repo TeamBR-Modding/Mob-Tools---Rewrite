@@ -274,6 +274,7 @@ public class ToolHandler {
 		String blazeCore = ToolManager.blazeWandCore.getUnlocalizedName();
 		String infuser = ToolManager.infuser.getUnlocalizedName();
 		String infuserComplete = ToolManager.infuserComplete.getUnlocalizedName();
+		String enderMail = ToolManager.enderMail.getUnlocalizedName();
 
 		switch(i)
 		{
@@ -351,6 +352,8 @@ public class ToolHandler {
 				return "Kill Mobs to Charge";
 			if(itemName.equals(infuserComplete))
 				return "Completed! Use This to Craft an Infuser";
+			if(itemName.equals(enderMail))
+				return "Mails Things!";
 		}
 
 		return "It's a thingy!";

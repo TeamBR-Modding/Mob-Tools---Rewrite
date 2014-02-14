@@ -4,7 +4,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import com.pauljoda.mobtools.containers.ContainerEnderMail;
 import com.pauljoda.mobtools.containers.ContainerRepairAlter;
+import com.pauljoda.mobtools.containers.InventoryMail;
 import com.pauljoda.mobtools.infusion.ContainerInfusingFurnace;
 import com.pauljoda.mobtools.infusion.TileEntityInfusingFurnace;
 import com.pauljoda.mobtools.tileentities.TileEntityEnderPad;
@@ -26,6 +28,11 @@ public class CommonProxy implements IGuiHandler {
 
 	public Object getServerGuiElement(int guiID, EntityPlayer player, World world, int x, int y, int z)
 	{
+		
+		if(guiID == 6)
+		{
+			return new ContainerEnderMail(player.inventory, new InventoryMail(player.getHeldItem()), world);
+		}
 
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 

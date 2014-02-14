@@ -164,6 +164,12 @@ public class RecipiesInfuser {
 			
 			if(item.getItem() == Items.ender_pearl)
 				return new ItemStack(ToolManager.teleportAmulet, 1);
+			
+			if(item.getItem() == Items.iron_ingot)
+				return new ItemStack(ToolManager.magnetAmulet, 1);
+			
+			if(item.getItem() == Items.golden_carrot)
+				return new ItemStack(ToolManager.hungerAmulet, 1);
 
 		}
 
