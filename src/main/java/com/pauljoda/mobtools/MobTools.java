@@ -9,9 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.pauljoda.mobtools.blocks.BlockManager;
 import com.pauljoda.mobtools.common.CommonProxy;
 import com.pauljoda.mobtools.handlers.ConfigurationHandler;
 import com.pauljoda.mobtools.handlers.MobToolsEventHandler;
+import com.pauljoda.mobtools.item.ItemManager;
 import com.pauljoda.mobtools.lib.Reference;
 import com.pauljoda.mobtools.network.PacketPipeline;
 import com.pauljoda.mobtools.tools.ToolManager;
@@ -41,22 +43,12 @@ public class MobTools {
 	
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 	
-	
-	//Creeper
-	public static ToolMaterial CREEPER_TOOL_MATERIAL = EnumHelper.addToolMaterial("CREEPER_TOOL_MATERIAL", 3, 600, 10.0F, 6.0F, 0);
-	//Ender
-	public static ToolMaterial ENDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("ENDER_TOOL_MATERIAL", 3, 1600, 8.0F, 3F, 4);
-	//Blaze
-	public static ToolMaterial BLAZE_TOOL_MATERIAL = EnumHelper.addToolMaterial("BLAZE_TOOL_MATERIAL", 3, 800, 9.0F, 4F, 8);
-	//Spider
-	public static ToolMaterial SPIDER_TOOL_MATERIAL = EnumHelper.addToolMaterial("SPIDER_TOOL_MATERIAL", 3, 800, 5.0F, 2F, 50);
-	
 	public static CreativeTabs tabMobTools = new CreativeTabs("tabMobTools") {
 
 		@Override
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
-			return ToolManager.teleportAmulet;
+			return Item.getItemFromBlock(BlockManager.infusingFurnace);
 		}
 	};
 	
@@ -73,7 +65,12 @@ public class MobTools {
 		
 		//Register Tools
 		ToolManager.registerTools();
-		ToolManager.registerCraftingRecipes();
+		
+		ItemManager.registerItems();
+		ItemManager.registerItemCrafting();
+		
+		BlockManager.registerBlocks();
+		BlockManager.registerBlockCrafting();
 	
 				
 	}
@@ -81,6 +78,8 @@ public class MobTools {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 
+		proxy.registerRenderers();
+		
 		//Open Network Pipeline
 		packetPipeline.initalise();
 		

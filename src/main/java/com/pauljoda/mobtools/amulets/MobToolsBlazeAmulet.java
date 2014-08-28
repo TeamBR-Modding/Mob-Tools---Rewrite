@@ -10,10 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 import com.pauljoda.mobtools.MobTools;
+import com.pauljoda.mobtools.blocks.BlockManager;
 import com.pauljoda.mobtools.tools.ToolManager;
 
 import cpw.mods.fml.relauncher.Side;
@@ -64,7 +64,7 @@ public class MobToolsBlazeAmulet extends MobToolsAmulet {
 		if(world.getBlock(x, y, z) == Blocks.air)
 		{
 			world.playSoundAtEntity(player, "random.wood_click", 1.0F, 1.0F);
-			world.setBlock(x, y, z, ToolManager.blazeTorch);
+			world.setBlock(x, y, z, BlockManager.blazeTorch);
 			world.markBlockForUpdate(x, y, z);
 			itemstack.damageItem(1, player);
 			return true;
@@ -131,7 +131,7 @@ public class MobToolsBlazeAmulet extends MobToolsAmulet {
 			if(world.getLightBrightness((int)player.posX, (int)player.posY, (int)player.posZ)  < .5 && itemstack.stackTagCompound.getBoolean("Active")
 					&& world.getBlock((int)player.posX, (int)player.posY, (int)player.posZ) == Blocks.air)
 			{
-				world.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ToolManager.blazeTorch);
+				world.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, BlockManager.blazeTorch);
 				world.markBlockForUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
 				itemstack.damageItem(1, player);
 

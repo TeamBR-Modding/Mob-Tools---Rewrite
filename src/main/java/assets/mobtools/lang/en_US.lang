@@ -1,7 +1,7 @@
 itemGroup.tabMobTools=Mob Tools
 
-tile.infusingFurnace.name=Infusing Furnace
-tile.infusingFurnaceActive.name=Infusing Furnace
+tile.infusingFurnace.name=Infusing Alter
+tile.infusingFurnaceActive.name=Infusing Alter
 tile.enderPad.name=Ender Pad
 tile.mobToolsSpawner.name=Mob Tools Spawner
 tile.repairAlter.name=Repair Alter
@@ -55,8 +55,13 @@ item.infuserComplete.name=Complete Infuser
 
 item.powerCore.name=Power Core
 
+item.enderMail.name=Ender Mail
+tile.enderPackage.name=Ender Package
+
 item.blankAmulet.name=Blank Amulet
 item.blazeAmulet.name=Amulet of Illumination
 item.speedAmulet.name=Amulet of Speed
 item.jumpAmulet.name=Amulet of Lift
 item.teleportAmulet.name=Amulet of Memory
+item.magnetAmulet.name=Amulet of Attraction
+item.hungerAmulet.name=Amulet of Sustenance

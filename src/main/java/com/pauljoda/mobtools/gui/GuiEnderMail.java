@@ -1,34 +1,27 @@
 package com.pauljoda.mobtools.gui;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.ObjectArrays;
-import com.pauljoda.mobtools.MobTools;
-import com.pauljoda.mobtools.containers.ContainerEnderMail;
-import com.pauljoda.mobtools.network.MailPacket;
-import com.pauljoda.mobtools.network.PacketPipeline;
-import com.pauljoda.mobtools.tools.ToolManager;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.ClientCommandHandler;
+
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import com.pauljoda.mobtools.MobTools;
+import com.pauljoda.mobtools.containers.ContainerEnderMail;
+import com.pauljoda.mobtools.item.ItemManager;
+import com.pauljoda.mobtools.network.MailPacket;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiEnderMail extends GuiContainer {
@@ -136,7 +129,7 @@ public class GuiEnderMail extends GuiContainer {
 				EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().thePlayer;
 				if(player.inventory.getCurrentItem() != null)
 				{
-					if(player.inventory.getCurrentItem().getItem() == ToolManager.enderMail)
+					if(player.inventory.getCurrentItem().getItem() == ItemManager.enderMail)
 					{
 						MailPacket packet = new MailPacket(recipient.getText());
 						MobTools.packetPipeline.sendToServer(packet);

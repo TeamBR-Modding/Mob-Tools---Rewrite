@@ -118,6 +118,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
     	public void registerPackets()
     	{
     		registerPacket(MailPacket.class);
+    		registerPacket(PackagePacket.class);
     	}
     // Method to call from FMLPostInitializationEvent
     // Ensures that packet discriminators are common between server and client by using logical sorting

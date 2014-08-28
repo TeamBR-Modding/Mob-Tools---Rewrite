@@ -23,13 +23,16 @@ public class MobToolsShovel extends ItemSpade {
 
 	int ingot;
 	int type;
-
-	public MobToolsShovel(ToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type) {
+	int level;
+	String material;
+	
+	public MobToolsShovel(ToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type, int level, String material) {
 		super(par2EnumToolMaterial);
 		this.setUnlocalizedName(unlocalized);
-		this.setCreativeTab(MobTools.tabMobTools);
 		this.ingot = ingot;
 		this.type = type;
+		this.level = level;
+		this.material = material;
 	}
 
 
@@ -114,7 +117,7 @@ public class MobToolsShovel extends ItemSpade {
 	{
 		if(type == 1)
 		{
-			ToolHandler.creeperMine(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, "shovel");
+			ToolHandler.creeperMine(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, "shovel", level);
 			return true;
 		}
 		return false;
@@ -142,5 +145,6 @@ public class MobToolsShovel extends ItemSpade {
 		//Items: 7
 		
         par3List.add("\u00a76" + ToolHandler.getInformation(3, type, ""));
+        par3List.add(material);
     }
 }

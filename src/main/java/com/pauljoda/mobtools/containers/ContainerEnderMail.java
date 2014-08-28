@@ -107,10 +107,8 @@ public class ContainerEnderMail extends Container {
 			for(int i = 0; i < players.size(); i++)
 			{
 				EntityPlayerMP recipient = players.get(i);
-				System.out.println(recipient.getDisplayName() + " is it " + userName);
 				if(recipient.getDisplayName().equals(userName))
 				{
-					System.out.println("Yes");
 					ItemStack mailContents = mail.getStackInSlot(0);
 					EntityItem itemstack = new EntityItem(recipient.worldObj, recipient.posX, recipient.posY + 2, recipient.posZ, mailContents);
 					recipient.worldObj.spawnEntityInWorld(itemstack);

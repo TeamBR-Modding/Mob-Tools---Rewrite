@@ -5,11 +5,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.pauljoda.mobtools.containers.ContainerEnderMail;
+import com.pauljoda.mobtools.containers.ContainerEnderPackage;
+import com.pauljoda.mobtools.containers.ContainerInfusingFurnace;
 import com.pauljoda.mobtools.containers.ContainerRepairAlter;
 import com.pauljoda.mobtools.containers.InventoryMail;
-import com.pauljoda.mobtools.infusion.ContainerInfusingFurnace;
-import com.pauljoda.mobtools.infusion.TileEntityInfusingFurnace;
+import com.pauljoda.mobtools.tileentities.TileEntityEnderPackage;
 import com.pauljoda.mobtools.tileentities.TileEntityEnderPad;
+import com.pauljoda.mobtools.tileentities.TileEntityInfusingFurnace;
 import com.pauljoda.mobtools.tileentities.TileEntityMobToolsSpawner;
 import com.pauljoda.mobtools.tileentities.TileEntityRepairAlter;
 
@@ -24,6 +26,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityEnderPad.class, "tileEntityEnderPad");
 		GameRegistry.registerTileEntity(TileEntityMobToolsSpawner.class, "tileEntityMobToolsSpawner");
 		GameRegistry.registerTileEntity(TileEntityRepairAlter.class, "repairAlter");
+		GameRegistry.registerTileEntity(TileEntityEnderPackage.class, "enderPackage");
 	}
 
 	public Object getServerGuiElement(int guiID, EntityPlayer player, World world, int x, int y, int z)
@@ -45,6 +48,9 @@ public class CommonProxy implements IGuiHandler {
 		{
 			return new ContainerRepairAlter(player.inventory, (TileEntityRepairAlter) tileEntity);
 		}
+		
+		if(tileEntity != null && tileEntity instanceof TileEntityEnderPackage)
+			return new ContainerEnderPackage(player.inventory, (TileEntityEnderPackage)tileEntity);
 
 
 		return null;
@@ -55,8 +61,7 @@ public class CommonProxy implements IGuiHandler {
 		return null;
 	}
 
-	public int registerRenderers() {
-		return 0;
+	public void registerRenderers() {
 	}
 
 

@@ -16,13 +16,16 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.pauljoda.mobtools.MobTools;
+import com.pauljoda.mobtools.item.ItemManager;
+import com.pauljoda.mobtools.lib.Reference;
 import com.pauljoda.mobtools.tileentities.TileEntityRepairAlter;
+import com.pauljoda.mobtools.tools.ToolManager;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockRepairAlter extends BlockContainer {
-	
+
 	@SideOnly(Side.CLIENT)
 	private IIcon alterSide;
 	@SideOnly(Side.CLIENT)
@@ -35,6 +38,31 @@ public class BlockRepairAlter extends BlockContainer {
 		setBlockName("repairAlter");
 		setCreativeTab(MobTools.tabMobTools);
 		this.setHardness(3.0F);	
+		this.setBlockBounds(.05F, 0F, .05F, .95F, 1.0F, .95F);
+	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	/**
+	 * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+	 */
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
+
+	/**
+	 * The type of render function that is called for this block
+	 */
+	@Override
+	public int getRenderType()
+	{
+		return Reference.repairAlterRenderID;
 	}
 
 
@@ -46,23 +74,104 @@ public class BlockRepairAlter extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
+
 		if (par1World.isRemote)
 		{
 			return true;
 		}
+
 		else
 		{
 			TileEntityRepairAlter tileentityfurnace = (TileEntityRepairAlter)par1World.getTileEntity(par2, par3, par4);
 
-			if (tileentityfurnace != null)
+			if (tileentityfurnace != null && par5EntityPlayer.isSneaking())
 			{
 				par5EntityPlayer.openGui(MobTools.instance, 0, par1World, par2, par3, par4);
 			}
 
+			if(par7 >= 0F && par7 <= .2F && par8 >= .9F && par8 <= 1.1F && par9 >= 0.0F && par9 <= 0.2F)
+			{
+				if(par5EntityPlayer.inventory.getCurrentItem() != null)
+				{
+					if(tileentityfurnace.inv[0] == null)
+					{
+						if(par5EntityPlayer.inventory.getCurrentItem().getItem() == ItemManager.creepium)
+						{
+							tileentityfurnace.inv[0] = par5EntityPlayer.inventory.getCurrentItem();
+							par5EntityPlayer.setCurrentItemOrArmor(0, null);
+							par1World.markBlockForUpdate(tileentityfurnace.xCoord, tileentityfurnace.yCoord, tileentityfurnace.zCoord);
+							return true;
+						}
+					}
+				}
+			}
+
+			if(par7 >= 0F && par7 <= .2F && par8 >= .9F && par8 <= 1.1F && par9 >= 0.8F && par9 <= 1.0F)
+			{
+				if(par5EntityPlayer.inventory.getCurrentItem() != null)
+				{
+					if(tileentityfurnace.inv[2] == null)
+					{
+						if(par5EntityPlayer.inventory.getCurrentItem().getItem() == ItemManager.spidium)
+						{
+							tileentityfurnace.inv[2] = par5EntityPlayer.inventory.getCurrentItem();
+							par5EntityPlayer.setCurrentItemOrArmor(0, null);
+							par1World.markBlockForUpdate(tileentityfurnace.xCoord, tileentityfurnace.yCoord, tileentityfurnace.zCoord);
+							return true;
+						}
+					}
+				}
+			}
+
+			if(par7 >= 0.8F && par7 <= 1.0F && par8 >= .9F && par8 <= 1.1F && par9 >= 0.0F && par9 <= 0.2F)
+			{
+				if(par5EntityPlayer.inventory.getCurrentItem() != null)
+				{
+					if(tileentityfurnace.inv[1] == null)
+					{
+						if(par5EntityPlayer.inventory.getCurrentItem().getItem() == ItemManager.endium)
+						{
+							tileentityfurnace.inv[1] = par5EntityPlayer.inventory.getCurrentItem();
+							par5EntityPlayer.setCurrentItemOrArmor(0, null);
+							par1World.markBlockForUpdate(tileentityfurnace.xCoord, tileentityfurnace.yCoord, tileentityfurnace.zCoord);
+							return true;
+						}
+					}
+				}
+			}
+
+			if(par7 >= 0.8F && par7 <= 1.0F && par8 >= .9F && par8 <= 1.1F && par9 >= 0.8F && par9 <= 1.0F)
+			{
+				if(par5EntityPlayer.inventory.getCurrentItem() != null)
+				{
+					if(tileentityfurnace.inv[3] == null)
+					{
+						if(par5EntityPlayer.inventory.getCurrentItem().getItem() == ItemManager.blazium)
+						{
+							tileentityfurnace.inv[3] = par5EntityPlayer.inventory.getCurrentItem();
+							par5EntityPlayer.setCurrentItemOrArmor(0, null);
+							par1World.markBlockForUpdate(tileentityfurnace.xCoord, tileentityfurnace.yCoord, tileentityfurnace.zCoord);
+							return true;
+						}
+					}
+				}
+			}
+
+
+			if(tileentityfurnace.inv[4] == null)
+			{
+				tileentityfurnace.inv[4] = par5EntityPlayer.inventory.getCurrentItem();
+				par5EntityPlayer.setCurrentItemOrArmor(0, null);
+				par1World.markBlockForUpdate(tileentityfurnace.xCoord, tileentityfurnace.yCoord, tileentityfurnace.zCoord);
+				return true;
+			}
+
+
+
 			return true;
 		}
 	}
-	
+
 	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random r)
 	{
@@ -73,7 +182,11 @@ public class BlockRepairAlter extends BlockContainer {
 			{
 				double xVar = r.nextGaussian();
 				double zVar = r.nextGaussian();
-				par1World.spawnParticle("portal", alter.xCoord + .5D, alter.yCoord, alter.zCoord + .5D, xVar, .5D, zVar);
+				par1World.spawnParticle("portal", alter.xCoord + .5D, alter.yCoord + 1.5, alter.zCoord + .5D, xVar, .5D, zVar);
+				par1World.spawnParticle("reddust", alter.xCoord + .1, alter.yCoord + 1.3, alter.zCoord + .1, 0D, 238D, 0D);
+				par1World.spawnParticle("reddust", alter.xCoord + .9, alter.yCoord + 1.3, alter.zCoord + .1, 0D, 0D, 1D);
+				par1World.spawnParticle("reddust", alter.xCoord + .1, alter.yCoord + 1.3, alter.zCoord + .9, 0D, 0D, 0D);
+				par1World.spawnParticle("reddust", alter.xCoord + .9, alter.yCoord + 1.3, alter.zCoord + .9, 0D, .8D, .3D);
 			}
 		}
 	}
@@ -135,12 +248,6 @@ public class BlockRepairAlter extends BlockContainer {
 		return Item.getItemFromBlock(this);
 	}
 
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-	
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2)
 	{

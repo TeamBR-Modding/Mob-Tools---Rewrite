@@ -1,6 +1,6 @@
 package com.pauljoda.mobtools.containers;
 
-import com.pauljoda.mobtools.tools.MobToolsItemEnderMail;
+import com.pauljoda.mobtools.item.MobToolsItemEnderMail;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

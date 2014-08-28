@@ -21,13 +21,14 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 public class MobToolsHoe extends ItemHoe {
 	int ingot;
 	int type;
+	String material;
 
-	public MobToolsHoe(ToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type) {
+	public MobToolsHoe(ToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type, String material) {
 		super(par2EnumToolMaterial);
 		this.setUnlocalizedName(unlocalized);
-		this.setCreativeTab(MobTools.tabMobTools);
 		this.ingot = ingot;
 		this.type = type;
+		this.material = material;
 	}
 
 	@Override
@@ -136,5 +137,6 @@ public class MobToolsHoe extends ItemHoe {
 		//Items: 7
 
 		par3List.add("\u00a76" + ToolHandler.getInformation(4, type, ""));
+		par3List.add(material);
 	}
 }

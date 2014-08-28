@@ -7,8 +7,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import com.pauljoda.mobtools.item.ItemManager;
 import com.pauljoda.mobtools.tools.ToolManager;
 
 public class TileEntityRepairAlter extends TileEntity implements IInventory {
@@ -66,20 +70,21 @@ public class TileEntityRepairAlter extends TileEntity implements IInventory {
 	 */
 	public boolean checkForGems()
 	{
+		boolean damaged = false;
 		if(inv[0] != null && inv[1] != null && inv[2] != null && inv[3] != null)
 		{
-			if(inv[0].getUnlocalizedName().equals(ToolManager.creepium.getUnlocalizedName()) && inv[1].getUnlocalizedName().equals(ToolManager.endium.getUnlocalizedName())
-					&& inv[2].getUnlocalizedName().equals(ToolManager.spidium.getUnlocalizedName()) && inv[3].getUnlocalizedName().equals(ToolManager.blazium.getUnlocalizedName()))
+			if(inv[0].getUnlocalizedName().equals(ItemManager.creepium.getUnlocalizedName()) && inv[1].getUnlocalizedName().equals(ItemManager.endium.getUnlocalizedName())
+					&& inv[2].getUnlocalizedName().equals(ItemManager.spidium.getUnlocalizedName()) && inv[3].getUnlocalizedName().equals(ItemManager.blazium.getUnlocalizedName()))
 			{
 				for(int i = 0; i < 4; i++)
 				{
 					if(inv[i].getItemDamage() >= inv[i].getMaxDamage() - 1)
 					{
 						inv[i] = null;
-						return false;
+						damaged = true;
 					}
 				}
-				return true;
+				return !damaged;
 			}
 		}
 		return false;
@@ -118,6 +123,19 @@ public class TileEntityRepairAlter extends TileEntity implements IInventory {
 			}
 		}
 		tagCompound.setTag("Inventory", itemList);
+	}
+	
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
+	{
+		readFromNBT(pkt.func_148857_g());
 	}
 
 	@Override

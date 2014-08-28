@@ -1,11 +1,5 @@
 package com.pauljoda.mobtools.handlers;
 
-import com.pauljoda.mobtools.lib.Reference;
-import com.pauljoda.mobtools.tools.MobToolsItemPowerCore;
-import com.pauljoda.mobtools.tools.ToolManager;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -28,6 +22,13 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+
+import com.pauljoda.mobtools.item.ItemManager;
+import com.pauljoda.mobtools.item.MobToolsItemPowerCore;
+import com.pauljoda.mobtools.lib.Reference;
+import com.pauljoda.mobtools.tools.ToolManager;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class MobToolsEventHandler {
 
@@ -76,7 +77,7 @@ public class MobToolsEventHandler {
 					{
 						if(inv.getStackInSlot(i) != null)
 						{
-							if(inv.getStackInSlot(i).getItem() == ToolManager.infuser)
+							if(inv.getStackInSlot(i).getItem() == ItemManager.infuser)
 							{
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
@@ -121,7 +122,7 @@ public class MobToolsEventHandler {
 					{
 						if(inv.getStackInSlot(i) != null)
 						{
-							if(inv.getStackInSlot(i).getItem() == ToolManager.infuser)
+							if(inv.getStackInSlot(i).getItem() == ItemManager.infuser)
 							{
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
@@ -166,7 +167,7 @@ public class MobToolsEventHandler {
 					{
 						if(inv.getStackInSlot(i) != null)
 						{
-							if(inv.getStackInSlot(i).getItem() == ToolManager.infuser)
+							if(inv.getStackInSlot(i).getItem() == ItemManager.infuser)
 							{
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
@@ -211,7 +212,7 @@ public class MobToolsEventHandler {
 					{
 						if(inv.getStackInSlot(i) != null)
 						{
-							if(inv.getStackInSlot(i).getItem() == ToolManager.infuser)
+							if(inv.getStackInSlot(i).getItem() == ItemManager.infuser)
 							{
 								if(inv.getStackInSlot(i).stackTagCompound != null)
 								{
@@ -265,7 +266,7 @@ public class MobToolsEventHandler {
 				{
 					if(player.inventory.getStackInSlot(i) != null)
 					{
-						if(player.inventory.getStackInSlot(i).getItem() == ToolManager.powerCore)
+						if(player.inventory.getStackInSlot(i).getItem() == ItemManager.powerCore)
 						{
 							ItemStack powerCore = player.inventory.getStackInSlot(i);
 							if(powerCore.stackTagCompound == null)

@@ -3,9 +3,10 @@ package com.pauljoda.mobtools.blocks;
 import java.util.Random;
 
 import com.pauljoda.mobtools.MobTools;
+import com.pauljoda.mobtools.item.ItemManager;
+import com.pauljoda.mobtools.item.MobToolsItemPowerCore;
 import com.pauljoda.mobtools.tileentities.MobToolsSpawnerLogic;
 import com.pauljoda.mobtools.tileentities.TileEntityMobToolsSpawner;
-import com.pauljoda.mobtools.tools.MobToolsItemPowerCore;
 import com.pauljoda.mobtools.tools.ToolManager;
 
 import net.minecraft.block.BlockContainer;
@@ -37,7 +38,7 @@ public class BlockMobToolsSpawner extends BlockContainer {
 		TileEntityMobToolsSpawner spawner = (TileEntityMobToolsSpawner) world.getTileEntity(x, y, z);
 		if(player.inventory.getCurrentItem() != null)
 		{
-			if(player.inventory.getCurrentItem().getItem() == ToolManager.powerCore && !spawner.isActive)
+			if(player.inventory.getCurrentItem().getItem() == ItemManager.powerCore && !spawner.isActive)
 			{
 				if(player.inventory.getCurrentItem().stackTagCompound != null)
 				{

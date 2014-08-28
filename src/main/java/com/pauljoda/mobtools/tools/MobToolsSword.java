@@ -19,12 +19,14 @@ public class MobToolsSword extends ItemSword {
 
 	int ingot;
 	int type;
-	public MobToolsSword(ToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type) {
+	String material;
+	
+	public MobToolsSword(ToolMaterial par2EnumToolMaterial, String unlocalized, int ingot, int type, String Material) {
 		super(par2EnumToolMaterial);
 		this.setUnlocalizedName(unlocalized);
-		this.setCreativeTab(MobTools.tabMobTools);
 		this.ingot = ingot;
 		this.type = type;
+		this.material = Material;
 	}
 
 	@Override
@@ -57,6 +59,7 @@ public class MobToolsSword extends ItemSword {
 		//Items: 7
 		
         par3List.add("\u00a76" + ToolHandler.getInformation(1, type, ""));
+        par3List.add(material);
     }
 
 	@SideOnly(Side.CLIENT)

@@ -2,13 +2,13 @@ package com.pauljoda.mobtools.tileentities;
 
 import java.util.List;
 
-import com.pauljoda.mobtools.handlers.GeneralSettings;
-import com.pauljoda.mobtools.tools.ToolManager;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import com.pauljoda.mobtools.blocks.BlockManager;
+import com.pauljoda.mobtools.handlers.GeneralSettings;
 
 public class TileEntityEnderPad extends TileEntity {
 	int cooldown;
@@ -48,7 +48,7 @@ public class TileEntityEnderPad extends TileEntity {
 					zPos = zCoord;
 					break;
 					}
-					if(world.getBlock(xPos, yPos, zPos).getUnlocalizedName().equals(ToolManager.enderPad.getUnlocalizedName()))
+					if(world.getBlock(xPos, yPos, zPos).getUnlocalizedName().equals(BlockManager.enderPad.getUnlocalizedName()))
 					{
 						if(world.getTileEntity(xPos, yPos, zPos) instanceof TileEntityEnderPad)
 						{
@@ -74,7 +74,7 @@ public class TileEntityEnderPad extends TileEntity {
 
 	@SuppressWarnings("unchecked")
 	protected List<EntityPlayer> getPlayersOnGrid() {
-		AxisAlignedBB bb = AxisAlignedBB.getAABBPool().getAABB(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1);
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1);
 		return worldObj.getEntitiesWithinAABB(EntityPlayer.class, bb);
 	}
 

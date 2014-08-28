@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Level;
 
 import net.minecraftforge.common.config.Configuration;
 
-import com.pauljoda.mobtools.lib.ConfigurationSettings;
 import com.pauljoda.mobtools.lib.Reference;
 
 import cpw.mods.fml.common.FMLLog;

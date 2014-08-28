@@ -3,37 +3,27 @@ package com.pauljoda.mobtools.handlers;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.pauljoda.mobtools.tools.ToolManager;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCocoa;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockMushroom;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.BlockStem;
 import net.minecraft.block.IGrowable;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.BonemealEvent;
+
+import com.pauljoda.mobtools.item.ItemManager;
+import com.pauljoda.mobtools.tools.ToolManager;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ToolHandler {
 
@@ -262,19 +252,19 @@ public class ToolHandler {
 		//4: Blaze
 
 		//Items
-		String creepium = ToolManager.creepium.getUnlocalizedName();
-		String endium = ToolManager.endium.getUnlocalizedName();
-		String spidium = ToolManager.spidium.getUnlocalizedName();
-		String blazium = ToolManager.blazium.getUnlocalizedName();
-		String inertCore = ToolManager.inertWandCore.getUnlocalizedName();
-		String goldenRod = ToolManager.goldenrod.getUnlocalizedName();
-		String creeperCore = ToolManager.creeperWandCore.getUnlocalizedName();
-		String enderCore = ToolManager.enderWandCore.getUnlocalizedName();
-		String spiderCore = ToolManager.spiderWandCore.getUnlocalizedName();
-		String blazeCore = ToolManager.blazeWandCore.getUnlocalizedName();
-		String infuser = ToolManager.infuser.getUnlocalizedName();
-		String infuserComplete = ToolManager.infuserComplete.getUnlocalizedName();
-		String enderMail = ToolManager.enderMail.getUnlocalizedName();
+		String creepium = ItemManager.creepium.getUnlocalizedName();
+		String endium = ItemManager.endium.getUnlocalizedName();
+		String spidium = ItemManager.spidium.getUnlocalizedName();
+		String blazium = ItemManager.blazium.getUnlocalizedName();
+		String inertCore = ItemManager.inertWandCore.getUnlocalizedName();
+		String goldenRod = ItemManager.goldenrod.getUnlocalizedName();
+		String creeperCore = ItemManager.creeperWandCore.getUnlocalizedName();
+		String enderCore = ItemManager.enderWandCore.getUnlocalizedName();
+		String spiderCore = ItemManager.spiderWandCore.getUnlocalizedName();
+		String blazeCore = ItemManager.blazeWandCore.getUnlocalizedName();
+		String infuser = ItemManager.infuser.getUnlocalizedName();
+		String infuserComplete = ItemManager.infuserComplete.getUnlocalizedName();
+		String enderMail = ItemManager.enderMail.getUnlocalizedName();
 
 		switch(i)
 		{
@@ -360,7 +350,7 @@ public class ToolHandler {
 	}
 
 
-	public static boolean  creeperMine(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, String tool)
+	public static boolean  creeperMine(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int side, String tool, int level)
 	{
 		Block block = world.getBlock(x, y, z);
 		int localMeta = world.getBlockMetadata(x, y, z);
@@ -368,7 +358,7 @@ public class ToolHandler {
 		{
 			if(block.getHarvestTool(localMeta) != null)
 			{
-				if(block.getHarvestTool(localMeta).equals(tool) && block.getHarvestLevel(localMeta) <= 3)
+				if(block.getHarvestTool(localMeta).equals(tool) && block.getHarvestLevel(localMeta) <= level)
 				{
 
 					if(player.inventory.hasItem(Items.gunpowder) || player.capabilities.isCreativeMode)
@@ -416,7 +406,7 @@ public class ToolHandler {
 									{
 										if(localBlock.getHarvestTool(metaLocal) != null)
 										{
-											if(localBlock.getHarvestTool(metaLocal).equals(tool) && localBlock.getHarvestLevel(metaLocal) <= 3)
+											if(localBlock.getHarvestTool(metaLocal).equals(tool) && localBlock.getHarvestLevel(metaLocal) <= level)
 											{
 												ArrayList<ItemStack> items = localBlock.getDrops(world, x, y, z, localMeta, 0);
 												if(items == null || items.size() == 0)

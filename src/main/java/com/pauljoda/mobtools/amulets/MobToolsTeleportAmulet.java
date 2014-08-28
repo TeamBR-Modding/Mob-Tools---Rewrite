@@ -11,6 +11,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.pauljoda.mobtools.MobTools;
+import com.pauljoda.mobtools.rendering.ParticleHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -49,6 +50,7 @@ public class MobToolsTeleportAmulet extends MobToolsAmulet {
 				int y = itemstack.stackTagCompound.getInteger("YCoord");
 				int z = itemstack.stackTagCompound.getInteger("ZCoord");
 				player.setPositionAndUpdate((double)x, (double)y, (double)z);
+				ParticleHelper.spawnEnderCircles(par2World, x, y, z);
 				player.playSound("mob.endermen.portal", 1F, 1F);
 
 				for(int i = 0; i < player.inventory.getSizeInventory(); i++)

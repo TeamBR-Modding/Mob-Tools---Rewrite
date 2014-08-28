@@ -1,15 +1,13 @@
 package com.pauljoda.mobtools.containers;
 
-import com.pauljoda.mobtools.handlers.GeneralSettings;
-import com.pauljoda.mobtools.tileentities.TileEntityRepairAlter;
-import com.pauljoda.mobtools.tools.MobToolsItem;
-import com.pauljoda.mobtools.tools.ToolManager;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+
+import com.pauljoda.mobtools.item.ItemManager;
+import com.pauljoda.mobtools.tileentities.TileEntityRepairAlter;
+import com.pauljoda.mobtools.tools.ToolManager;
 
 public class SlotRepairAlter extends Slot {
 
@@ -41,23 +39,23 @@ public class SlotRepairAlter extends Slot {
 		switch(type)
 		{
 		case 0 : 
-			if(par1ItemStack.getUnlocalizedName().equals(ToolManager.creepium.getUnlocalizedName()))
+			if(par1ItemStack.getUnlocalizedName().equals(ItemManager.creepium.getUnlocalizedName()))
 				return true;
 			else 
 				return false;
 
 		case 1 : 
-			if(par1ItemStack.getUnlocalizedName().equals(ToolManager.endium.getUnlocalizedName()))
+			if(par1ItemStack.getUnlocalizedName().equals(ItemManager.endium.getUnlocalizedName()))
 				return true;
 			else
 				return false;
 		case 2 :
-			if(par1ItemStack.getUnlocalizedName().equals(ToolManager.spidium.getUnlocalizedName()))
+			if(par1ItemStack.getUnlocalizedName().equals(ItemManager.spidium.getUnlocalizedName()))
 				return true;
 			else
 				return false;
 		case 3 : 
-			if(par1ItemStack.getUnlocalizedName().equals(ToolManager.blazium.getUnlocalizedName()))
+			if(par1ItemStack.getUnlocalizedName().equals(ItemManager.blazium.getUnlocalizedName()))
 				return true;
 			else
 				return false;
@@ -68,9 +66,10 @@ public class SlotRepairAlter extends Slot {
 
 	}
 
+	/*
 	public IIcon getBackgroundIconIndex()
 	{
 		return MobToolsItem.backGround;
 	}
-
+*/
 }
