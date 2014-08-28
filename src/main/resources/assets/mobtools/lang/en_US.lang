@@ -1,0 +1,67 @@
+itemGroup.tabMobTools=Mob Tools
+
+tile.infusingFurnace.name=Infusing Alter
+tile.infusingFurnaceActive.name=Infusing Alter
+tile.enderPad.name=Ender Pad
+tile.mobToolsSpawner.name=Mob Tools Spawner
+tile.repairAlter.name=Repair Alter
+tile.blazeTorch.name=Blaze Torch
+
+item.creepium.name=Creepium
+item.endium.name=Endium
+item.spidium.name=Spidium
+item.blazium.name=Blazium
+
+item.creeperSword.name=Creeper Sword
+item.enderSword.name=Ender Sword
+item.spiderSword.name=Spider Sword
+item.blazeSword.name=Blaze Sword
+
+item.creeperPick.name=Creeper Pickaxe
+item.enderPick.name=Ender Pickaxe
+item.spiderPick.name=Spider Pickaxe
+item.blazePick.name=Blaze Pickaxe
+
+item.creeperShovel.name=Creeper Shovel
+item.enderShovel.name=Ender Shovel
+item.spiderShovel.name=Spider Shovel
+item.blazeShovel.name=Blaze Shovel
+
+item.creeperAxe.name=Creeper Axe
+item.enderAxe.name=Ender Axe
+item.spiderAxe.name=Spider Axe
+item.blazeAxe.name=Blaze Axe
+
+item.creeperHoe.name=Creeper Hoe
+item.enderHoe.name=Ender Hoe
+item.spiderHoe.name=Spider Hoe
+item.blazeHoe.name=Blaze Hoe
+
+item.creeperWand.name=Creeper Wand
+item.enderWand.name=Ender Wand
+item.spiderWand.name=Spider Wand
+item.blazeWand.name=Blaze Wand
+
+item.inertWandCore.name=Inert Wand Core
+item.goldenRod.name=Goldenrod
+
+item.creeperWandCore.name=Creeper Wand Core
+item.enderWandCore.name=Ender Wand Core
+item.spiderWandCore.name=Spider Wand Core
+item.blazeWandCore.name=Blaze Wand Core
+
+item.infuser.name=Infuser
+item.infuserComplete.name=Complete Infuser
+
+item.powerCore.name=Power Core
+
+item.enderMail.name=Ender Mail
+tile.enderPackage.name=Ender Package
+
+item.blankAmulet.name=Blank Amulet
+item.blazeAmulet.name=Amulet of Illumination
+item.speedAmulet.name=Amulet of Speed
+item.jumpAmulet.name=Amulet of Lift
+item.teleportAmulet.name=Amulet of Memory
+item.magnetAmulet.name=Amulet of Attraction
+item.hungerAmulet.name=Amulet of Sustenance
